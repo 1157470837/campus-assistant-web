@@ -89,6 +89,71 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>3.6.10.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>3.4.0.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<version>3.1.0.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.4.0.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>3.1.0.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.5.8</version>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
 
 		<!-- mysql -->
 		<dependency>
@@ -244,55 +309,21 @@
 							<goal>execute</goal>
 						</goals>
 					</execution>
-					
-					<!-- 测试前删除已有数据库
-						<execution>
-							<id>drop-db-before-test-if-any</id>
-							<phase>process-test-resources</phase>
-							<goals>
-								<goal>execute</goal>
-							</goals>
-							<configuration>
-								<autocommit>true</autocommit>
-								<sqlCommand>drop database campusAssistant_web</sqlCommand>
-								<onError>continue</onError>
-							</configuration>
-						</execution>
-					 -->
-					
-					<!-- 测试前填充已有数据
-						<execution>
-							<id>create-data</id>
-							<phase>process-test-resources</phase>
-							<goals>
-								<goal>execute</goal>
-							</goals>
-							<configuration>
-								<orderFile>ascending</orderFile>
-								<fileset>
-									<basedir>${basedir}</basedir>
-									<includes>
-										<include>src/test/sql/test-data2.sql</include>
-										<include>src/test/sql/test-data1.sql</include>
-									</includes>
-								</fileset>
-							</configuration>
-						</execution>
-					-->
 
-					<!-- 测试完毕删除数据库
-						<execution>
-							<id>drop-db-after-test</id>
-							<phase>test</phase>
-							<goals>
-								<goal>execute</goal>
-							</goals>
-							<configuration>
-								<autocommit>true</autocommit>
-								<sqlCommand>drop database yourdb</sqlCommand>
-							</configuration>
-						</execution>
-					-->
+					<!-- 测试前删除已有数据库 <execution> <id>drop-db-before-test-if-any</id> <phase>process-test-resources</phase> 
+						<goals> <goal>execute</goal> </goals> <configuration> <autocommit>true</autocommit> 
+						<sqlCommand>drop database campusAssistant_web</sqlCommand> <onError>continue</onError> 
+						</configuration> </execution> -->
+
+					<!-- 测试前填充已有数据 <execution> <id>create-data</id> <phase>process-test-resources</phase> 
+						<goals> <goal>execute</goal> </goals> <configuration> <orderFile>ascending</orderFile> 
+						<fileset> <basedir>${basedir}</basedir> <includes> <include>src/test/sql/test-data2.sql</include> 
+						<include>src/test/sql/test-data1.sql</include> </includes> </fileset> </configuration> 
+						</execution> -->
+
+					<!-- 测试完毕删除数据库 <execution> <id>drop-db-after-test</id> <phase>test</phase> 
+						<goals> <goal>execute</goal> </goals> <configuration> <autocommit>true</autocommit> 
+						<sqlCommand>drop database yourdb</sqlCommand> </configuration> </execution> -->
 				</executions>
 			</plugin>
 		</plugins>

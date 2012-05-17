@@ -5,15 +5,15 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import com.techthinker.CAWeb.vo.CampusNews;
+import com.techthinker.CAWeb.vo.Campusnews;
 
 @Controller("messageAction")
 @Scope("prototype")
-public class CampusNewsAction extends ActionSupport implements ModelDriven<CampusNews>{
+public class CampusnewsAction extends ActionSupport implements ModelDriven<Campusnews>{
 	private static final long serialVersionUID = -3266057605774486873L;
 
 	@Override
-	public CampusNews getModel() {
+	public Campusnews getModel() {
 		// TODO Auto-generated method stub
 		return null;
 	}

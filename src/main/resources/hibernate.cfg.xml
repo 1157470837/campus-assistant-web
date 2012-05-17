@@ -9,20 +9,37 @@
 		<property name="hibernate.connection.driver_class">
 			com.mysql.jdbc.Driver
 		</property>
-		<property name="hibernate.connection.username">ca_techthinker</property>
-		<property name="hibernate.connection.password">techthinker</property>
+		<property name="hibernate.connection.username">
+			ca_techthinker
+		</property>
+		<property name="hibernate.connection.password">
+			techthinker
+		</property>
 		<property name="hibernate.connection.url">
 			jdbc:mysql://localhost:3306/campusAssistant_web
 		</property>
 		<property name="hibernate.dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
-	
+
 		<!-- 配置可以显示SQL语句 -->
 		<property name="show_sql">true</property>
-		
+
 		<!-- 设置根据用户对象自动创建数据库表 -->
 		<property name="hbm2ddl.auto">update</property>
 		<mapping class="com.techthinker.CAWeb.vo.XXX" />
+		<mapping class="com.techthinker.CAWeb.vo.Grade" />
+		<mapping class="com.techthinker.CAWeb.vo.Major" />
+		<mapping class="com.techthinker.CAWeb.vo.College" />
+		<mapping class="com.techthinker.CAWeb.vo.Question" />
+		<mapping class="com.techthinker.CAWeb.vo.Geoinfo" />
+		<mapping class="com.techthinker.CAWeb.vo.User" />
+		<mapping class="com.techthinker.CAWeb.vo.Usertype" />
+		<mapping class="com.techthinker.CAWeb.vo.Relation" />
+		<mapping class="com.techthinker.CAWeb.vo.Campusnews" />
+		<mapping class="com.techthinker.CAWeb.vo.Chatroom" />
+		<mapping class="com.techthinker.CAWeb.vo.Message" />
+		<mapping class="com.techthinker.CAWeb.vo.Spotcomment" />
+		<mapping class="com.techthinker.CAWeb.vo.Scenicspot" />
 	</session-factory>
 </hibernate-configuration>
