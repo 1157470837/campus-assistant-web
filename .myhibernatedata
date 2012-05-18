@@ -1,5 +1,5 @@
 #MyEclipse Hibernate Properties
-#Thu May 17 20:11:35 CST 2012
+#Fri May 18 11:19:45 CST 2012
 sessionFactoryName=com.techthinker.CAWeb.vo.HibernateSessionFactory
 genBasicCompId=true
 profile=
@@ -22,4 +22,3 @@ reSettingsFile=
 configFile=/campus-assistant-web/src/main/resources/hibernate.cfg.xml
 createConfigFile=false
 addLibs2Classpath=true
-baseDaoClass=BaseHibernateDAO

@@ -11,111 +11,130 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 /**
  * Message entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "message", catalog = "campusassistant_web")
-public class Message implements java.io.Serializable {
+@Table(name="message"
+    ,catalog="campusassistant_web"
+)
 
-	// Fields
+public class Message  implements java.io.Serializable {
 
-	/**
+
+    // Fields    
+
+     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 6485521301353185503L;
 	private Integer messageId;
-	private User userByUserId;
-	private User userByTouserId;
-	private Chatroom chatroom;
-	private String content;
-	private Timestamp pubdate;
-	private Integer totype;
+     private User userByUserId;
+     private User userByTouserId;
+     private Chatroom chatroom;
+     private String content;
+     private Timestamp pubdate;
+     private Integer totype;
 
-	// Constructors
 
-	/** default constructor */
-	public Message() {
-	}
+    // Constructors
 
-	/** full constructor */
-	public Message(User userByUserId, User userByTouserId, Chatroom chatroom,
-			String content, Timestamp pubdate, Integer totype) {
-		this.userByUserId = userByUserId;
-		this.userByTouserId = userByTouserId;
-		this.chatroom = chatroom;
-		this.content = content;
-		this.pubdate = pubdate;
-		this.totype = totype;
-	}
+    /** default constructor */
+    public Message() {
+    }
 
-	// Property accessors
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "message_id", unique = true, nullable = false)
-	public Integer getMessageId() {
-		return this.messageId;
-	}
+    
+    /** full constructor */
+    public Message(User userByUserId, User userByTouserId, Chatroom chatroom, String content, Timestamp pubdate, Integer totype) {
+        this.userByUserId = userByUserId;
+        this.userByTouserId = userByTouserId;
+        this.chatroom = chatroom;
+        this.content = content;
+        this.pubdate = pubdate;
+        this.totype = totype;
+    }
 
-	public void setMessageId(Integer messageId) {
-		this.messageId = messageId;
-	}
+   
+    // Property accessors
+    @Id @GeneratedValue(strategy=IDENTITY)
+    
+    @Column(name="message_id", unique=true, nullable=false)
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
-	public User getUserByUserId() {
-		return this.userByUserId;
-	}
+    public Integer getMessageId() {
+        return this.messageId;
+    }
+    
+    public void setMessageId(Integer messageId) {
+        this.messageId = messageId;
+    }
+	@ManyToOne(fetch=FetchType.LAZY)
+        @JoinColumn(name="user_id", nullable=false)
 
-	public void setUserByUserId(User userByUserId) {
-		this.userByUserId = userByUserId;
-	}
+    public User getUserByUserId() {
+        return this.userByUserId;
+    }
+    
+    public void setUserByUserId(User userByUserId) {
+        this.userByUserId = userByUserId;
+    }
+	@ManyToOne(fetch=FetchType.LAZY)
+        @JoinColumn(name="touser_id", nullable=false)
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "touser_id", nullable = false)
-	public User getUserByTouserId() {
-		return this.userByTouserId;
-	}
+    public User getUserByTouserId() {
+        return this.userByTouserId;
+    }
+    
+    public void setUserByTouserId(User userByTouserId) {
+        this.userByTouserId = userByTouserId;
+    }
+	@ManyToOne(fetch=FetchType.LAZY)
+        @JoinColumn(name="tochatroom_id", nullable=false)
 
-	public void setUserByTouserId(User userByTouserId) {
-		this.userByTouserId = userByTouserId;
-	}
+    public Chatroom getChatroom() {
+        return this.chatroom;
+    }
+    
+    public void setChatroom(Chatroom chatroom) {
+        this.chatroom = chatroom;
+    }
+    
+    @Column(name="content", nullable=false, length=65535)
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tochatroom_id", nullable = false)
-	public Chatroom getChatroom() {
-		return this.chatroom;
-	}
+    public String getContent() {
+        return this.content;
+    }
+    
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
+    @Column(name="pubdate", nullable=false, length=19)
 
-	public void setChatroom(Chatroom chatroom) {
-		this.chatroom = chatroom;
-	}
+    public Timestamp getPubdate() {
+        return this.pubdate;
+    }
+    
+    public void setPubdate(Timestamp pubdate) {
+        this.pubdate = pubdate;
+    }
+    
+    @Column(name="totype", nullable=false)
 
-	@Column(name = "content", nullable = false, length = 65535)
-	public String getContent() {
-		return this.content;
-	}
+    public Integer getTotype() {
+        return this.totype;
+    }
+    
+    public void setTotype(Integer totype) {
+        this.totype = totype;
+    }
+   
 
-	public void setContent(String content) {
-		this.content = content;
-	}
 
-	@Column(name = "pubdate", nullable = false, length = 19)
-	public Timestamp getPubdate() {
-		return this.pubdate;
-	}
 
-	public void setPubdate(Timestamp pubdate) {
-		this.pubdate = pubdate;
-	}
 
-	@Column(name = "totype", nullable = false)
-	public Integer getTotype() {
-		return this.totype;
-	}
 
-	public void setTotype(Integer totype) {
-		this.totype = totype;
-	}
+
+
 
 }

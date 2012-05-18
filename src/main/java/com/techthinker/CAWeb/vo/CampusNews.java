@@ -11,122 +11,142 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 /**
  * Campusnews entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "campusnews", catalog = "campusassistant_web")
-public class Campusnews implements java.io.Serializable {
+@Table(name="campusnews"
+    ,catalog="campusassistant_web"
+)
 
-	// Fields
+public class Campusnews  implements java.io.Serializable {
 
-	/**
+
+    // Fields    
+
+     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 6742786879679315019L;
 	private Integer campusnewId;
-	private User user;
-	private College college;
-	private Major major;
-	private Integer newstype;
-	private String content;
-	private Timestamp pubdate;
-	private Integer level;
+     private User user;
+     private College college;
+     private Major major;
+     private Integer newstype;
+     private String content;
+     private Timestamp pubdate;
+     private Integer level;
 
-	// Constructors
 
-	/** default constructor */
-	public Campusnews() {
-	}
+    // Constructors
 
-	/** full constructor */
-	public Campusnews(User user, College college, Major major,
-			Integer newstype, String content, Timestamp pubdate, Integer level) {
-		this.user = user;
-		this.college = college;
-		this.major = major;
-		this.newstype = newstype;
-		this.content = content;
-		this.pubdate = pubdate;
-		this.level = level;
-	}
+    /** default constructor */
+    public Campusnews() {
+    }
 
-	// Property accessors
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "campusnew_id", unique = true, nullable = false)
-	public Integer getCampusnewId() {
-		return this.campusnewId;
-	}
+    
+    /** full constructor */
+    public Campusnews(User user, College college, Major major, Integer newstype, String content, Timestamp pubdate, Integer level) {
+        this.user = user;
+        this.college = college;
+        this.major = major;
+        this.newstype = newstype;
+        this.content = content;
+        this.pubdate = pubdate;
+        this.level = level;
+    }
 
-	public void setCampusnewId(Integer campusnewId) {
-		this.campusnewId = campusnewId;
-	}
+   
+    // Property accessors
+    @Id @GeneratedValue(strategy=IDENTITY)
+    
+    @Column(name="campusnew_id", unique=true, nullable=false)
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
-	public User getUser() {
-		return this.user;
-	}
+    public Integer getCampusnewId() {
+        return this.campusnewId;
+    }
+    
+    public void setCampusnewId(Integer campusnewId) {
+        this.campusnewId = campusnewId;
+    }
+	@ManyToOne(fetch=FetchType.LAZY)
+        @JoinColumn(name="user_id", nullable=false)
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public User getUser() {
+        return this.user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
+	@ManyToOne(fetch=FetchType.LAZY)
+        @JoinColumn(name="college_id", nullable=false)
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "college_id", nullable = false)
-	public College getCollege() {
-		return this.college;
-	}
+    public College getCollege() {
+        return this.college;
+    }
+    
+    public void setCollege(College college) {
+        this.college = college;
+    }
+	@ManyToOne(fetch=FetchType.LAZY)
+        @JoinColumn(name="major_id", nullable=false)
 
-	public void setCollege(College college) {
-		this.college = college;
-	}
+    public Major getMajor() {
+        return this.major;
+    }
+    
+    public void setMajor(Major major) {
+        this.major = major;
+    }
+    
+    @Column(name="newstype", nullable=false)
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "major_id", nullable = false)
-	public Major getMajor() {
-		return this.major;
-	}
+    public Integer getNewstype() {
+        return this.newstype;
+    }
+    
+    public void setNewstype(Integer newstype) {
+        this.newstype = newstype;
+    }
+    
+    @Column(name="content", nullable=false, length=65535)
 
-	public void setMajor(Major major) {
-		this.major = major;
-	}
+    public String getContent() {
+        return this.content;
+    }
+    
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
+    @Column(name="pubdate", nullable=false, length=19)
 
-	@Column(name = "newstype", nullable = false)
-	public Integer getNewstype() {
-		return this.newstype;
-	}
+    public Timestamp getPubdate() {
+        return this.pubdate;
+    }
+    
+    public void setPubdate(Timestamp pubdate) {
+        this.pubdate = pubdate;
+    }
+    
+    @Column(name="level", nullable=false)
 
-	public void setNewstype(Integer newstype) {
-		this.newstype = newstype;
-	}
+    public Integer getLevel() {
+        return this.level;
+    }
+    
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+   
 
-	@Column(name = "content", nullable = false, length = 65535)
-	public String getContent() {
-		return this.content;
-	}
 
-	public void setContent(String content) {
-		this.content = content;
-	}
 
-	@Column(name = "pubdate", nullable = false, length = 19)
-	public Timestamp getPubdate() {
-		return this.pubdate;
-	}
 
-	public void setPubdate(Timestamp pubdate) {
-		this.pubdate = pubdate;
-	}
 
-	@Column(name = "level", nullable = false)
-	public Integer getLevel() {
-		return this.level;
-	}
 
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
+
 
 }

@@ -9,151 +9,160 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 /**
  * College entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "college", catalog = "campusassistant_web")
-public class College implements java.io.Serializable {
+@Table(name="college"
+    ,catalog="campusassistant_web"
+)
 
-	// Fields
+public class College  implements java.io.Serializable {
 
-	/**
+
+    // Fields    
+
+     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -6686982411800059713L;
+	private static final long serialVersionUID = 1870080354354424057L;
 	private Integer collegeId;
-	private String collegeName;
-	private String description;
-	private String image;
-	private Set<User> users = new HashSet<User>(0);
-	private Set<Campusnews> campusnewses = new HashSet<Campusnews>(0);
-	private Set<Grade> grades = new HashSet<Grade>(0);
-	private Set<Chatroom> chatrooms = new HashSet<Chatroom>(0);
-	private Set<Major> majors = new HashSet<Major>(0);
-	private Set<Geoinfo> geoinfos = new HashSet<Geoinfo>(0);
+     private Scenicspot scenicspot;
+     private String collegeName;
+     private String description;
+     private Set<User> users = new HashSet<User>(0);
+     private Set<Campusnews> campusnewses = new HashSet<Campusnews>(0);
+     private Set<Grade> grades = new HashSet<Grade>(0);
+     private Set<Chatroom> chatrooms = new HashSet<Chatroom>(0);
+     private Set<Major> majors = new HashSet<Major>(0);
 
-	// Constructors
 
-	/** default constructor */
-	public College() {
-	}
+    // Constructors
+
+    /** default constructor */
+    public College() {
+    }
 
 	/** minimal constructor */
-	public College(String collegeName, String description) {
-		this.collegeName = collegeName;
-		this.description = description;
-	}
+    public College(Scenicspot scenicspot, String collegeName, String description) {
+        this.scenicspot = scenicspot;
+        this.collegeName = collegeName;
+        this.description = description;
+    }
+    
+    /** full constructor */
+    public College(Scenicspot scenicspot, String collegeName, String description, Set<User> users, Set<Campusnews> campusnewses, Set<Grade> grades, Set<Chatroom> chatrooms, Set<Major> majors) {
+        this.scenicspot = scenicspot;
+        this.collegeName = collegeName;
+        this.description = description;
+        this.users = users;
+        this.campusnewses = campusnewses;
+        this.grades = grades;
+        this.chatrooms = chatrooms;
+        this.majors = majors;
+    }
 
-	/** full constructor */
-	public College(String collegeName, String description, String image,
-			Set<User> users, Set<Campusnews> campusnewses, Set<Grade> grades,
-			Set<Chatroom> chatrooms, Set<Major> majors, Set<Geoinfo> geoinfos) {
-		this.collegeName = collegeName;
-		this.description = description;
-		this.image = image;
-		this.users = users;
-		this.campusnewses = campusnewses;
-		this.grades = grades;
-		this.chatrooms = chatrooms;
-		this.majors = majors;
-		this.geoinfos = geoinfos;
-	}
+   
+    // Property accessors
+    @Id @GeneratedValue(strategy=IDENTITY)
+    
+    @Column(name="college_id", unique=true, nullable=false)
 
-	// Property accessors
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "college_id", unique = true, nullable = false)
-	public Integer getCollegeId() {
-		return this.collegeId;
-	}
+    public Integer getCollegeId() {
+        return this.collegeId;
+    }
+    
+    public void setCollegeId(Integer collegeId) {
+        this.collegeId = collegeId;
+    }
+	@ManyToOne(fetch=FetchType.LAZY)
+        @JoinColumn(name="scenicspot_id", nullable=false)
 
-	public void setCollegeId(Integer collegeId) {
-		this.collegeId = collegeId;
-	}
+    public Scenicspot getScenicspot() {
+        return this.scenicspot;
+    }
+    
+    public void setScenicspot(Scenicspot scenicspot) {
+        this.scenicspot = scenicspot;
+    }
+    
+    @Column(name="college_name", nullable=false, length=30)
 
-	@Column(name = "college_name", nullable = false, length = 30)
-	public String getCollegeName() {
-		return this.collegeName;
-	}
+    public String getCollegeName() {
+        return this.collegeName;
+    }
+    
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
+    }
+    
+    @Column(name="description", nullable=false, length=65535)
 
-	public void setCollegeName(String collegeName) {
-		this.collegeName = collegeName;
-	}
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="college")
 
-	@Column(name = "description", nullable = false, length = 65535)
-	public String getDescription() {
-		return this.description;
-	}
+    public Set<User> getUsers() {
+        return this.users;
+    }
+    
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="college")
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public Set<Campusnews> getCampusnewses() {
+        return this.campusnewses;
+    }
+    
+    public void setCampusnewses(Set<Campusnews> campusnewses) {
+        this.campusnewses = campusnewses;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="college")
 
-	@Column(name = "image")
-	public String getImage() {
-		return this.image;
-	}
+    public Set<Grade> getGrades() {
+        return this.grades;
+    }
+    
+    public void setGrades(Set<Grade> grades) {
+        this.grades = grades;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="college")
 
-	public void setImage(String image) {
-		this.image = image;
-	}
+    public Set<Chatroom> getChatrooms() {
+        return this.chatrooms;
+    }
+    
+    public void setChatrooms(Set<Chatroom> chatrooms) {
+        this.chatrooms = chatrooms;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="college")
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
-	public Set<User> getUsers() {
-		return this.users;
-	}
+    public Set<Major> getMajors() {
+        return this.majors;
+    }
+    
+    public void setMajors(Set<Major> majors) {
+        this.majors = majors;
+    }
+   
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
-	public Set<Campusnews> getCampusnewses() {
-		return this.campusnewses;
-	}
 
-	public void setCampusnewses(Set<Campusnews> campusnewses) {
-		this.campusnewses = campusnewses;
-	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
-	public Set<Grade> getGrades() {
-		return this.grades;
-	}
 
-	public void setGrades(Set<Grade> grades) {
-		this.grades = grades;
-	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
-	public Set<Chatroom> getChatrooms() {
-		return this.chatrooms;
-	}
 
-	public void setChatrooms(Set<Chatroom> chatrooms) {
-		this.chatrooms = chatrooms;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
-	public Set<Major> getMajors() {
-		return this.majors;
-	}
-
-	public void setMajors(Set<Major> majors) {
-		this.majors = majors;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
-	public Set<Geoinfo> getGeoinfos() {
-		return this.geoinfos;
-	}
-
-	public void setGeoinfos(Set<Geoinfo> geoinfos) {
-		this.geoinfos = geoinfos;
-	}
 
 }
