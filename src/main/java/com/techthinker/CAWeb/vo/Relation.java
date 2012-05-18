@@ -19,6 +19,10 @@ public class Relation implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8011139444779110219L;
 	private Integer relationId;
 	private User userByUserId2;
 	private User userByUserId1;

@@ -21,6 +21,10 @@ public class College implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6686982411800059713L;
 	private Integer collegeId;
 	private String collegeName;
 	private String description;

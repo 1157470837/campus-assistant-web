@@ -21,6 +21,10 @@ public class Usertype implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -905605613100028269L;
 	private Integer usertypeId;
 	private Integer usertypeName;
 	private Set<User> users = new HashSet<User>(0);

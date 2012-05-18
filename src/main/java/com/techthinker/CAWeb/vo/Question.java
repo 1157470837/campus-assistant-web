@@ -19,6 +19,10 @@ public class Question implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6116015545219419257L;
 	private Integer questionId;
 	private User user;
 	private String content;

@@ -23,6 +23,10 @@ public class Grade implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6598694857122709243L;
 	private Integer gradeId;
 	private College college;
 	private Major major;

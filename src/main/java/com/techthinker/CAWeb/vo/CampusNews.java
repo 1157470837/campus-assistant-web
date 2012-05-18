@@ -20,6 +20,10 @@ public class Campusnews implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6742786879679315019L;
 	private Integer campusnewId;
 	private User user;
 	private College college;

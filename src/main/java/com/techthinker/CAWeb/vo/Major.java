@@ -23,6 +23,10 @@ public class Major implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7197980652261641568L;
 	private Integer majorId;
 	private College college;
 	private String majorName;

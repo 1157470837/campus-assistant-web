@@ -21,8 +21,15 @@ import javax.persistence.Table;
 @Table(name = "chatroom", catalog = "campusassistant_web")
 public class Chatroom implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -214209130405893843L;
 	// Fields
 
+	/**
+	 * 
+	 */
 	private Integer chatroomId;
 	private Grade grade;
 	private College college;

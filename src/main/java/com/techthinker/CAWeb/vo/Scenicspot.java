@@ -21,6 +21,10 @@ public class Scenicspot implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4104724109957188782L;
 	private Integer scenicspotId;
 	private String spotname;
 	private String description;

@@ -24,6 +24,10 @@ public class User implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3661194912693800204L;
 	private Integer userId;
 	private College college;
 	private Major major;

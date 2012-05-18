@@ -19,6 +19,10 @@ public class Geoinfo implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5665754040316880043L;
 	private Integer geoinfoId;
 	private User user;
 	private College college;

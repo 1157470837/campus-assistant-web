@@ -46,7 +46,7 @@ public class AuthFilter implements Filter {
 		}
 		int roleId = 0;
 		if(loginUser!=null) {
-			roleId = loginUser.getType();
+			//roleId = loginUser.getType();
 		}
 		boolean canAccess = AuthUtil.checkAuth(roleId, 
 				(Map<Integer,List<String>>)hReq.getSession().getServletContext().getAttribute("auths"), 

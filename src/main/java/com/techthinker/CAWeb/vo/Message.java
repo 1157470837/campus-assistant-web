@@ -20,6 +20,10 @@ public class Message implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6485521301353185503L;
 	private Integer messageId;
 	private User userByUserId;
 	private User userByTouserId;

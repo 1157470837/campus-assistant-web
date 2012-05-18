@@ -20,6 +20,10 @@ public class Spotcomment implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3681830620784208100L;
 	private Integer spotcommentId;
 	private User user;
 	private Scenicspot scenicspot;

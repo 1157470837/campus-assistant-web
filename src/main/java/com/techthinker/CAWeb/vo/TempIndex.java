@@ -1,12 +1,7 @@
 package com.techthinker.CAWeb.vo;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.techthinker.CAWeb.util.IndexUtil;
 
 /**
  * 临时索引对象，当数据库更新时并不马上更新索引，存入临时索引表中，由近实时更新管理类管理更新

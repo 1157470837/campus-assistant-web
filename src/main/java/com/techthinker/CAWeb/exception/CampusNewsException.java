@@ -1,22 +1,22 @@
 package com.techthinker.CAWeb.exception;
 
-public class CampusNewsException extends RuntimeException {
+public class CampusnewsException extends RuntimeException {
 
 	private static final long serialVersionUID = -8412165961002835819L;
 
-	public CampusNewsException() {
+	public CampusnewsException() {
 		super();
 	}
 
-	public CampusNewsException(String message, Throwable cause) {
+	public CampusnewsException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public CampusNewsException(String message) {
+	public CampusnewsException(String message) {
 		super(message);
 	}
 
-	public CampusNewsException(Throwable cause) {
+	public CampusnewsException(Throwable cause) {
 		super(cause);
 	}
 	
