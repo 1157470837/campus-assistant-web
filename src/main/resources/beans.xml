@@ -22,8 +22,7 @@
 		<property name="url" value="${url}"/>
 		<property name="username" value="${username}"/>
 		<property name="password" value="${password}"/>
-		<!-- 配置连接池的初始值 -->
-		<property name="initialSize" value="1"/>
+		<!-- 配置连接池的初始值<property name="initialSize" value="5"/> -->
 		<!-- 连接池的最大值 -->
 		<property name="maxActive" value="100"/>
 		<!-- 最大空闲时，当经过一个高峰之后，连接池可以将一些用不到的连接释放，一直减少到maxIdle为止 -->
@@ -53,18 +52,20 @@
 		</property>
 	</bean>
 	
-	
+	<!-- 采用注解事务 -->
 	<bean id="txManager" 
             class="org.springframework.orm.hibernate3.HibernateTransactionManager">
     	<property name="sessionFactory" ref="sessionFactory"/>
   	</bean>
   	
+  	<!-- 配置哪些类的方法进行事务管理 -->  
 	<aop:config>
 	    <aop:pointcut id="myMethod" 
 	            expression="execution(* com.techthinker.CAWeb.service.*.*(..))"/>
 	    <aop:advisor advice-ref="txAdvice" pointcut-ref="myMethod"/>
 	</aop:config>
 	
+	<!-- 采用@Transaction注解方式使用事务 -->
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 	   <tx:attributes>
 	     <tx:method name="add*" propagation="REQUIRED" />

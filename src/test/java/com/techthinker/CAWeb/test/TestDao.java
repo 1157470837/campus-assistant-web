@@ -1,14 +1,7 @@
 //package com.techthinker.CAWeb.test;
 //
-//import java.util.List;
-//
-//import org.junit.BeforeClass;
-//import org.junit.Test;
 //import org.springframework.beans.factory.BeanFactory;
-//import org.springframework.context.support.ClassPathXmlApplicationContext;
 //
-//import com.techthinker.CAWeb.idao.IUserDao;
-//import com.techthinker.CAWeb.vo.User;
 //
 //public class TestDao {
 //	private static BeanFactory factory;

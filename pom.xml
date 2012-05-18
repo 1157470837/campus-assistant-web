@@ -81,6 +81,17 @@
 			<artifactId>spring-orm</artifactId>
 			<version>3.1.1.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.12</version>
+		</dependency>
+
 
 
 		<!-- hibernate -->
@@ -97,7 +108,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-commons-annotations</artifactId>
-			<version>3.1.0.GA</version>
+			<version>3.2.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -139,11 +150,13 @@
 			<artifactId>ehcache</artifactId>
 			<version>1.2.3</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.5.8</version>
 		</dependency>
+
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -171,13 +184,8 @@
 			<version>3.6.0</version>
 		</dependency>
 
-		<!-- tika -->
-		<dependency>
-			<groupId>org.apache.tika</groupId>
-			<artifactId>tika-app</artifactId>
-			<version>1.1</version>
-		</dependency>
-
+		<!-- tika <dependency> <groupId>org.apache.tika</groupId> <artifactId>tika-app</artifactId> 
+			<version>1.1</version> </dependency> -->
 		<!--****************************底层依赖包**************************** -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -219,6 +227,16 @@
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>20030825.184428</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>20030825.183949</version>
 		</dependency>
 
 		<dependency>

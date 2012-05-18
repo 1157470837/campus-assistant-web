@@ -27,7 +27,6 @@
 
 		<!-- 设置根据用户对象自动创建数据库表 -->
 		<property name="hbm2ddl.auto">update</property>
-		<mapping class="com.techthinker.CAWeb.vo.XXX" />
 		<mapping class="com.techthinker.CAWeb.vo.Grade" />
 		<mapping class="com.techthinker.CAWeb.vo.Major" />
 		<mapping class="com.techthinker.CAWeb.vo.College" />
@@ -41,5 +40,6 @@
 		<mapping class="com.techthinker.CAWeb.vo.Message" />
 		<mapping class="com.techthinker.CAWeb.vo.Spotcomment" />
 		<mapping class="com.techthinker.CAWeb.vo.Scenicspot" />
+
 	</session-factory>
 </hibernate-configuration>
