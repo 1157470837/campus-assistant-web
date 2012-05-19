@@ -22,7 +22,7 @@ public class Question implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6116015545219419257L;
+	private static final long serialVersionUID = -717998406059910606L;
 	private Integer questionId;
 	private User user;
 	private String content;
@@ -33,6 +33,13 @@ public class Question implements java.io.Serializable {
 
 	/** default constructor */
 	public Question() {
+	}
+
+	/** minimal constructor */
+	public Question(String content, String answer, Boolean checked) {
+		this.content = content;
+		this.answer = answer;
+		this.checked = checked;
 	}
 
 	/** full constructor */
@@ -56,7 +63,7 @@ public class Question implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id")
 	public User getUser() {
 		return this.user;
 	}

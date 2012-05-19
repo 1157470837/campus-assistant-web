@@ -23,7 +23,7 @@ public class Spotcomment implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3681830620784208100L;
+	private static final long serialVersionUID = -746867880796023105L;
 	private Integer spotcommentId;
 	private User user;
 	private Scenicspot scenicspot;
@@ -39,9 +39,8 @@ public class Spotcomment implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Spotcomment(User user, Scenicspot scenicspot, String content,
+	public Spotcomment(Scenicspot scenicspot, String content,
 			Timestamp pubdate, Integer rating) {
-		this.user = user;
 		this.scenicspot = scenicspot;
 		this.content = content;
 		this.pubdate = pubdate;
@@ -72,7 +71,7 @@ public class Spotcomment implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id")
 	public User getUser() {
 		return this.user;
 	}

@@ -26,7 +26,7 @@ public class Scenicspot implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7369071624089467966L;
+	private static final long serialVersionUID = -8532003278219648800L;
 	private Integer scenicspotId;
 	private Geoinfo geoinfo;
 	private String spotname;
@@ -44,8 +44,7 @@ public class Scenicspot implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Scenicspot(Geoinfo geoinfo, String spotname, String description) {
-		this.geoinfo = geoinfo;
+	public Scenicspot(String spotname, String description) {
 		this.spotname = spotname;
 		this.description = description;
 	}
@@ -77,7 +76,7 @@ public class Scenicspot implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "geoinfo_id", nullable = false)
+	@JoinColumn(name = "geoinfo_id")
 	public Geoinfo getGeoinfo() {
 		return this.geoinfo;
 	}

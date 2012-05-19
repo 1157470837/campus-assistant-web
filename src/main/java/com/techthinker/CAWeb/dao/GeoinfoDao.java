@@ -17,8 +17,5 @@ public class GeoinfoDao extends BaseDao<Geoinfo> implements IGeoinfoDao {
 			this.add(g);
 		}
 	}
-	
-	public void jiaoadsfioe(){
-		
-	}
+
 }

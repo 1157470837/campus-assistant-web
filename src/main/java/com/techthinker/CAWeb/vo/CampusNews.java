@@ -23,7 +23,7 @@ public class Campusnews implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6742786879679315019L;
+	private static final long serialVersionUID = -2973259422003653904L;
 	private Integer campusnewId;
 	private User user;
 	private College college;
@@ -37,6 +37,17 @@ public class Campusnews implements java.io.Serializable {
 
 	/** default constructor */
 	public Campusnews() {
+	}
+
+	/** minimal constructor */
+	public Campusnews(College college, Major major, Integer newstype,
+			String content, Timestamp pubdate, Integer level) {
+		this.college = college;
+		this.major = major;
+		this.newstype = newstype;
+		this.content = content;
+		this.pubdate = pubdate;
+		this.level = level;
 	}
 
 	/** full constructor */
@@ -64,7 +75,7 @@ public class Campusnews implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id")
 	public User getUser() {
 		return this.user;
 	}

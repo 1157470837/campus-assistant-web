@@ -33,14 +33,14 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`scenicspot` (
   `rate_mean` DOUBLE NULL DEFAULT 0 ,
   `rate_num` INT NULL DEFAULT 0 ,
   `image` BLOB NULL ,
-  `geoinfo_id` INT NOT NULL ,
+  `geoinfo_id` INT NULL ,
   PRIMARY KEY (`scenicspot_id`) ,
   INDEX `scenicspot_geoinfo_id` (`geoinfo_id` ASC) ,
   CONSTRAINT `scenicspot_geoinfo_id`
     FOREIGN KEY (`geoinfo_id` )
     REFERENCES `campusAssistant_web`.`geoinfo` (`geoinfo_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL)
 ENGINE = InnoDB;
 
 
@@ -57,8 +57,8 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`college` (
   CONSTRAINT `college_scenicspot_id`
     FOREIGN KEY (`scenicspot_id` )
     REFERENCES `campusAssistant_web`.`scenicspot` (`scenicspot_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -76,8 +76,8 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`major` (
   CONSTRAINT `major_college_id`
     FOREIGN KEY (`college_id` )
     REFERENCES `campusAssistant_web`.`college` (`college_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -101,14 +101,14 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`user` (
   `sex` VARCHAR(4) NOT NULL ,
   `email` VARCHAR(30) NOT NULL ,
   `phone` VARCHAR(20) NULL ,
-  `college_id` INT NOT NULL ,
-  `major_id` INT NOT NULL ,
+  `college_id` INT NULL ,
+  `major_id` INT NULL ,
   `usertype_id` INT NOT NULL ,
-  `entrance_year` INT NULL ,
+  `entrance_year` INT NOT NULL ,
   `birthday` DATETIME NULL ,
   `description` TEXT NULL ,
   `image` BLOB NULL ,
-  `geoinfo_id` INT NOT NULL ,
+  `geoinfo_id` INT NULL ,
   PRIMARY KEY (`user_id`) ,
   INDEX `user_college_id` (`college_id` ASC) ,
   INDEX `user_major_id` (`major_id` ASC) ,
@@ -117,23 +117,23 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`user` (
   CONSTRAINT `user_college_id`
     FOREIGN KEY (`college_id` )
     REFERENCES `campusAssistant_web`.`college` (`college_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
   CONSTRAINT `user_major_id`
     FOREIGN KEY (`major_id` )
     REFERENCES `campusAssistant_web`.`major` (`major_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
   CONSTRAINT `user_usertype_id`
     FOREIGN KEY (`usertype_id` )
     REFERENCES `campusAssistant_web`.`usertype` (`usertype_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `user_geoinfo_id`
     FOREIGN KEY (`geoinfo_id` )
     REFERENCES `campusAssistant_web`.`geoinfo` (`geoinfo_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL)
 ENGINE = InnoDB;
 
 
@@ -150,13 +150,13 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`relation` (
   CONSTRAINT `relation_user_id1`
     FOREIGN KEY (`user_id1` )
     REFERENCES `campusAssistant_web`.`user` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `relation_user_id2`
     FOREIGN KEY (`user_id2` )
     REFERENCES `campusAssistant_web`.`user` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -176,13 +176,13 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`grade` (
   CONSTRAINT `grade_college_id`
     FOREIGN KEY (`college_id` )
     REFERENCES `campusAssistant_web`.`college` (`college_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `grade_major_id`
     FOREIGN KEY (`major_id` )
     REFERENCES `campusAssistant_web`.`major` (`major_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -205,18 +205,18 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`chatroom` (
   CONSTRAINT `chatroom_college_id`
     FOREIGN KEY (`college_id` )
     REFERENCES `campusAssistant_web`.`college` (`college_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `chatroom_major_id`
     FOREIGN KEY (`major_id` )
     REFERENCES `campusAssistant_web`.`major` (`major_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `chatroom_grade_id`
     FOREIGN KEY (`grade_id` )
     REFERENCES `campusAssistant_web`.`grade` (`grade_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -238,18 +238,18 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`message` (
   CONSTRAINT `message_user_id`
     FOREIGN KEY (`user_id` )
     REFERENCES `campusAssistant_web`.`user` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `message_touser_id`
     FOREIGN KEY (`touser_id` )
     REFERENCES `campusAssistant_web`.`user` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `message_chatroom_id`
     FOREIGN KEY (`tochatroom_id` )
     REFERENCES `campusAssistant_web`.`chatroom` (`chatroom_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -261,7 +261,7 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`campusnews` (
   `newstype` INT NOT NULL ,
   `content` TEXT NOT NULL ,
   `pubdate` DATETIME NOT NULL ,
-  `user_id` INT NOT NULL ,
+  `user_id` INT NULL ,
   `college_id` INT NOT NULL ,
   `major_id` INT NOT NULL ,
   `level` INT NOT NULL ,
@@ -272,18 +272,18 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`campusnews` (
   CONSTRAINT `campus_user_id`
     FOREIGN KEY (`user_id` )
     REFERENCES `campusAssistant_web`.`user` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
   CONSTRAINT `campus_college_id`
     FOREIGN KEY (`college_id` )
     REFERENCES `campusAssistant_web`.`college` (`college_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `campus_major_id`
     FOREIGN KEY (`major_id` )
     REFERENCES `campusAssistant_web`.`major` (`major_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -295,7 +295,7 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`spotcomment` (
   `content` TEXT NOT NULL ,
   `pubdate` DATETIME NOT NULL ,
   `scenicspot_id` INT NOT NULL ,
-  `user_id` INT NOT NULL ,
+  `user_id` INT NULL ,
   `rating` INT NOT NULL DEFAULT 0 ,
   `impression` BLOB NULL ,
   PRIMARY KEY (`spotcomment_id`) ,
@@ -304,13 +304,13 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`spotcomment` (
   CONSTRAINT `spotcomment_scenicspot_id`
     FOREIGN KEY (`scenicspot_id` )
     REFERENCES `campusAssistant_web`.`scenicspot` (`scenicspot_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `spotcomment_user_id`
     FOREIGN KEY (`user_id` )
     REFERENCES `campusAssistant_web`.`user` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL)
 ENGINE = InnoDB;
 
 
@@ -321,15 +321,15 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`question` (
   `question_id` INT NOT NULL AUTO_INCREMENT ,
   `content` TEXT NOT NULL ,
   `answer` TEXT NOT NULL ,
-  `user_id` INT NOT NULL ,
+  `user_id` INT NULL ,
   `checked` TINYINT(1) NOT NULL ,
   PRIMARY KEY (`question_id`) ,
   INDEX `question_user_id` (`user_id` ASC) ,
   CONSTRAINT `question_user_id`
     FOREIGN KEY (`user_id` )
     REFERENCES `campusAssistant_web`.`user` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL)
 ENGINE = InnoDB;
 
 

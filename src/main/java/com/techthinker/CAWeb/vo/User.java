@@ -27,7 +27,7 @@ public class User implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1021313288924032171L;
+	private static final long serialVersionUID = 9133918499731504211L;
 	private Integer userId;
 	private Geoinfo geoinfo;
 	private College college;
@@ -57,17 +57,14 @@ public class User implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public User(Geoinfo geoinfo, College college, Major major,
-			Usertype usertype, String username, String password, String sex,
-			String email) {
-		this.geoinfo = geoinfo;
-		this.college = college;
-		this.major = major;
+	public User(Usertype usertype, String username, String password,
+			String sex, String email, Integer entranceYear) {
 		this.usertype = usertype;
 		this.username = username;
 		this.password = password;
 		this.sex = sex;
 		this.email = email;
+		this.entranceYear = entranceYear;
 	}
 
 	/** full constructor */
@@ -114,7 +111,7 @@ public class User implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "geoinfo_id", nullable = false)
+	@JoinColumn(name = "geoinfo_id")
 	public Geoinfo getGeoinfo() {
 		return this.geoinfo;
 	}
@@ -124,7 +121,7 @@ public class User implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "college_id", nullable = false)
+	@JoinColumn(name = "college_id")
 	public College getCollege() {
 		return this.college;
 	}
@@ -134,7 +131,7 @@ public class User implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "major_id", nullable = false)
+	@JoinColumn(name = "major_id")
 	public Major getMajor() {
 		return this.major;
 	}
@@ -198,7 +195,7 @@ public class User implements java.io.Serializable {
 		this.phone = phone;
 	}
 
-	@Column(name = "entrance_year")
+	@Column(name = "entrance_year", nullable = false)
 	public Integer getEntranceYear() {
 		return this.entranceYear;
 	}
