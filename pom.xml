@@ -275,6 +275,22 @@
 			<version>1.6.2</version>
 		</dependency>
 	</dependencies>
+	
+	<!-- 生成测试报告 -->
+	<reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.12</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.1</version>
+      </plugin>
+    </plugins>
+  </reporting>
 
 	<build>
 		<finalName>campusAssistant-web</finalName>
@@ -307,13 +323,25 @@
 					<url>${mysql.url}</url>
 					<username>${mysql.username}</username>
 					<password>${mysql.password}</password>
-					<sqlCommand>
-						create database IF NOT EXISTS campusAssistant_web;
-						grant ALL ON campusAssistant_web.* TO "ca_techthinker"@"localhost"
-						IDENTIFIED BY 'techthinker';
-					</sqlCommand>
+
 				</configuration>
 				<executions>
+
+
+					<!-- 测试前删除已有数据库 -->
+					<execution>
+						<id>drop-db-before-test-if-any</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<autocommit>true</autocommit>
+							<sqlCommand>drop database campusAssistant_web</sqlCommand>
+							<onError>continue</onError>
+						</configuration>
+					</execution>
+
 					<!-- 初始化数据库 -->
 					<execution>
 						<id>init-database</id>
@@ -321,12 +349,15 @@
 						<goals>
 							<goal>execute</goal>
 						</goals>
+						<configuration>
+							<autocommit>true</autocommit>
+							<sqlCommand>
+								create database IF NOT EXISTS campusAssistant_web;
+								grant ALL ON campusAssistant_web.* TO "ca_techthinker"@"localhost"
+								IDENTIFIED BY 'techthinker';
+							</sqlCommand>
+						</configuration>
 					</execution>
-
-					<!-- 测试前删除已有数据库 <execution> <id>drop-db-before-test-if-any</id> <phase>process-test-resources</phase> 
-						<goals> <goal>execute</goal> </goals> <configuration> <autocommit>true</autocommit> 
-						<sqlCommand>drop database campusAssistant_web</sqlCommand> <onError>continue</onError> 
-						</configuration> </execution> -->
 
 					<!-- 测试前填充已有数据 <execution> <id>create-data</id> <phase>process-test-resources</phase> 
 						<goals> <goal>execute</goal> </goals> <configuration> <orderFile>ascending</orderFile> 
