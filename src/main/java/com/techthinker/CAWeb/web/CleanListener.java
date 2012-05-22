@@ -10,6 +10,7 @@ import javax.servlet.ServletContextListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.techthinker.CAWeb.iservice.IIndexService;
 import com.techthinker.CAWeb.util.SystemContext;
 /**
  * application清理监听器类，当创建ServletContext时激发，目前用于Service的异步更新功能
@@ -63,8 +64,8 @@ public class CleanListener implements ServletContextListener {
 		public void run() {
 			SystemContext.setRealPath(realPath);
 			System.out.println("索引进行了提交"+new Date());
-//			IIndexService indexService = (IIndexService)wac.getBean("indexService");
-//			indexService.updateCommitIndex();
+			IIndexService indexService = (IIndexService)wac.getBean("indexService");
+			indexService.updateCommitIndex();
 		}
 	}
 	

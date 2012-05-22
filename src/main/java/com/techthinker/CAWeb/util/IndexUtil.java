@@ -1,61 +1,30 @@
 package com.techthinker.CAWeb.util;
 
+import com.techthinker.CAWeb.vo.IndexField;
 
-/**
- * 全文索引工具类，将相应数据库内容写入到本地solr索引中
- * @author JC@Techthinker.com
- *
- */
+
 public class IndexUtil {
-//	public static final String MSG_TYPE = "Message";
-//	public static final String ATTACHMENT_TYPE = "Attachment";
-//	
-//	public final static int ADD_OP = 1;
-//	public final static int DEL_OP = 2;
-//	public final static int UPDATE_OP = 3;
-//	
-//	public static List<String> indexAttachType = null;
-//	static {
-//		indexAttachType = new ArrayList<String>();
-//		indexAttachType.add("doc");
-//		indexAttachType.add("docx");
-//		indexAttachType.add("pdf");
-//		indexAttachType.add("txt");
-//	}
-//	
-//	/**
-//	 * 把附件的内容添加到field的content中
-//	 * @param fieldContents
-//	 * @param att
-//	 */
-//	public static void attach2Index(List<String> fieldContents,List<String> atths,Attachment att) {
-//		try {
-//			String filename = att.getNewName();
-//			if(IndexUtil.indexAttachType.contains(FilenameUtils.getExtension(filename))) {
-//				fieldContents.add(file2String(att.getNewName()));
-//				atths.add(att.getNewName());
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} catch (TikaException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	public static String file2String(String name) throws IOException, TikaException {
-//		String realPath = SystemContext.getRealPath();
-//		String path = realPath+"/upload/"+name;
-//		return new Tika().parseToString(new File(path));
-//	}
-//
-//	public static IndexField msg2IndexField(Message msg) {
-//		IndexField field = new IndexField();
-//		field.setId(msg.getId()+"");
-//		field.setObjId(msg.getId());
-//		field.setTitle(msg.getTitle());
-//		field.setType(MSG_TYPE);
-//		field.setCreateDate(msg.getCreateDate());
-//		return field;
-//	}
+	public static final String ACTION_USER = "User";
+	public static final String ACTION_COLLEGE = "College";
+	public static final String ACTION_MAJOR = "Major";
+	public static final String ACTION_GRADE = "grade";
+	public static final String ACTION_CAMPUSNEWS = "campusnews";
+	public static final String ACTION_QUESTION = "question";
+	public static final String ACTION_SCENICSPOT = "scenicspot";
+	public static final String ACTION_INTENT = "intent";
+	
+	public final static int OP_ADD= 1;
+	public final static int OP_DEL= 2;
+	public final static int OP_UPDATE = 3;
+	
+	public static IndexField createIndexField(int subjectId,String title,String content,String action) {
+		IndexField field = new IndexField();
+		field.setId(action+"_"+subjectId);
+		field.setSubjectId(subjectId);
+		field.setTitle(title);
+		field.setContent(content);
+		field.setAction(action);
+		return field;
+	}
 
 }

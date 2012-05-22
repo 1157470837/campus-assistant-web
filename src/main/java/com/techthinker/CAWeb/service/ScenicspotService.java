@@ -12,16 +12,36 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import com.techthinker.CAWeb.idao.IScenicspotDao;
+import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.iservice.IGeoinfoService;
 import com.techthinker.CAWeb.iservice.IScenicspotService;
+import com.techthinker.CAWeb.util.IndexUtil;
 import com.techthinker.CAWeb.util.SystemConstant;
 import com.techthinker.CAWeb.vo.Geoinfo;
 import com.techthinker.CAWeb.vo.Scenicspot;
+import com.techthinker.CAWeb.vo.TempIndex;
 
 @Service("scenicspotService")
 public class ScenicspotService implements IScenicspotService {
 	private IGeoinfoService geoinfoService;
 	private IScenicspotDao scenicspotDao;
+	private ITempIndexDao tempIndexDao;
+	
+
+	/**
+	 * @return the tempIndexDao
+	 */
+	public ITempIndexDao getTempIndexDao() {
+		return tempIndexDao;
+	}
+
+	/**
+	 * @param tempIndexDao the tempIndexDao to set
+	 */
+	@Resource
+	public void setTempIndexDao(ITempIndexDao tempIndexDao) {
+		this.tempIndexDao = tempIndexDao;
+	}
 
 	/**
 	 * @return the geoinfoService
@@ -96,17 +116,13 @@ public class ScenicspotService implements IScenicspotService {
 					latitude, true);
 			scenicspot.setGeoinfo(geoinfo);
 			scenicspotDao.add(scenicspot);
+			TempIndex tempIndex = new TempIndex();
+			tempIndex.setAdd();
+			tempIndex.setObjId(scenicspot.getScenicspotId());
+			tempIndex.setObjType(IndexUtil.ACTION_SCENICSPOT);
+			tempIndexDao.add(tempIndex);
 		}
 
-		// List<Geoinfo> geoinfos = new ArrayList<Geoinfo>();
-		// while (r != null) {
-		// for (int i = 0; i < 4; i++) {
-		// r = br.readLine();
-		// String[] local = r.split(",");
-		// latitude[i] = Double.valueOf(local[0]);
-		// longtitude[i] = Double.valueOf(local[1]);
-		// }
-		// }
 	}
 
 	@Override
