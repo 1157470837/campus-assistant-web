@@ -22,10 +22,10 @@ public class TestCollegeService {
 	
 	@Test
 	public void testAdd() {
-		College c = new College();
-		c.setCollegeName("信息科学与工程学院");
-		c.setDescription("信息科学与工程学院是山东科技大学中优秀的学院之一，师资力量强，研发能力强，现有设备齐全。");
-		collegeService.add(c);
+//		College c = new College();
+//		c.setCollegeName("信息科学与工程学院");
+//		c.setDescription("信息科学与工程学院是山东科技大学中优秀的学院之一，师资力量强，研发能力强，现有设备齐全。");
+//		collegeService.add(c);
 	}
 
 }

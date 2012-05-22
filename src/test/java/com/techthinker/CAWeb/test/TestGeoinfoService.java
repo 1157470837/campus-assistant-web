@@ -22,10 +22,10 @@ public class TestGeoinfoService {
 	
 	@Test
 	public void testPushGeoinfos() {
-		try {
-			geoinfoService.addGeoinfosFromInputStream(this.getClass().getClassLoader().getResourceAsStream("scenicspots.txt"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			geoinfoService.addGeoinfosFromInputStream(this.getClass().getClassLoader().getResourceAsStream("scenicspots.txt"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 }

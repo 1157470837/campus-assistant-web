@@ -1,13 +1,16 @@
 package com.techthinker.CAWeb.vo;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.sql.Blob;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,7 +36,7 @@ public class Chatroom implements java.io.Serializable {
 	private Major major;
 	private String chatroomName;
 	private Integer parentroomId;
-	private String image;
+	private Blob image;
 	private Integer level;
 	private Set<Message> messages = new HashSet<Message>(0);
 
@@ -56,7 +59,7 @@ public class Chatroom implements java.io.Serializable {
 
 	/** full constructor */
 	public Chatroom(Grade grade, College college, Major major,
-			String chatroomName, Integer parentroomId, String image,
+			String chatroomName, Integer parentroomId, Blob image,
 			Integer level, Set<Message> messages) {
 		this.grade = grade;
 		this.college = college;
@@ -129,11 +132,11 @@ public class Chatroom implements java.io.Serializable {
 	}
 
 	@Column(name = "image")
-	public String getImage() {
+	public Blob getImage() {
 		return this.image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(Blob image) {
 		this.image = image;
 	}
 

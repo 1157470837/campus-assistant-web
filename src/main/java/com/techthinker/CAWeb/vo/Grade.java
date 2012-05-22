@@ -1,13 +1,16 @@
 package com.techthinker.CAWeb.vo;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.sql.Blob;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,7 +35,7 @@ public class Grade implements java.io.Serializable {
 	private Major major;
 	private String gradeName;
 	private String description;
-	private String image;
+	private Blob image;
 	private Set<Chatroom> chatrooms = new HashSet<Chatroom>(0);
 
 	// Constructors
@@ -52,7 +55,7 @@ public class Grade implements java.io.Serializable {
 
 	/** full constructor */
 	public Grade(College college, Major major, String gradeName,
-			String description, String image, Set<Chatroom> chatrooms) {
+			String description, Blob image, Set<Chatroom> chatrooms) {
 		this.college = college;
 		this.major = major;
 		this.gradeName = gradeName;
@@ -112,11 +115,11 @@ public class Grade implements java.io.Serializable {
 	}
 
 	@Column(name = "image")
-	public String getImage() {
+	public Blob getImage() {
 		return this.image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(Blob image) {
 		this.image = image;
 	}
 

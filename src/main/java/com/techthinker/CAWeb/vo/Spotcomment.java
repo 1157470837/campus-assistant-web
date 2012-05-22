@@ -1,11 +1,14 @@
 package com.techthinker.CAWeb.vo;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.sql.Blob;
 import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,7 +33,7 @@ public class Spotcomment implements java.io.Serializable {
 	private String content;
 	private Timestamp pubdate;
 	private Integer rating;
-	private String impression;
+	private Blob impression;
 
 	// Constructors
 
@@ -49,7 +52,7 @@ public class Spotcomment implements java.io.Serializable {
 
 	/** full constructor */
 	public Spotcomment(User user, Scenicspot scenicspot, String content,
-			Timestamp pubdate, Integer rating, String impression) {
+			Timestamp pubdate, Integer rating, Blob impression) {
 		this.user = user;
 		this.scenicspot = scenicspot;
 		this.content = content;
@@ -118,11 +121,11 @@ public class Spotcomment implements java.io.Serializable {
 	}
 
 	@Column(name = "impression")
-	public String getImpression() {
+	public Blob getImpression() {
 		return this.impression;
 	}
 
-	public void setImpression(String impression) {
+	public void setImpression(Blob impression) {
 		this.impression = impression;
 	}
 

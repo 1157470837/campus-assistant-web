@@ -5,7 +5,7 @@
   id="myeclipse.1337065438953"
   context-root="/campusAssistant-web"
   j2ee-spec="6.0"
-  archive="campus-assistant-web.war">
+  archive="campusAssistant-web Maven Webapp.war">
   <attributes>
     <attribute name="webrootdir" value="src/main/webapp" />
   </attributes>

@@ -58,7 +58,20 @@ public class Geoinfo implements java.io.Serializable {
 		this.latitude4 = latitude4;
 		this.availabe = availabe;
 	}
-
+	
+	/** construct by  longtitude[],latitude[],availabe*/
+	public Geoinfo(Double[] longtitude, Double[] latitude, Boolean availabe) {
+		this.longtitude1 = longtitude[0];
+		this.longtitude2 = longtitude[1];
+		this.longtitude3 = longtitude[2];
+		this.longtitude4 = longtitude[3];
+		this.latitude1 = latitude[0];
+		this.latitude2 = latitude[1];
+		this.latitude3 = latitude[2];
+		this.latitude4 = latitude[3];
+		this.availabe = availabe;
+	}
+	
 	/** full constructor */
 	public Geoinfo(Double longtitude1, Double longtitude2, Double longtitude3,
 			Double longtitude4, Double latitude1, Double latitude2,

@@ -1,13 +1,16 @@
 package com.techthinker.CAWeb.vo;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.sql.Blob;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,7 +34,7 @@ public class Major implements java.io.Serializable {
 	private College college;
 	private String majorName;
 	private String description;
-	private String image;
+	private Blob image;
 	private Set<Campusnews> campusnewses = new HashSet<Campusnews>(0);
 	private Set<User> users = new HashSet<User>(0);
 	private Set<Grade> grades = new HashSet<Grade>(0);
@@ -52,7 +55,7 @@ public class Major implements java.io.Serializable {
 
 	/** full constructor */
 	public Major(College college, String majorName, String description,
-			String image, Set<Campusnews> campusnewses, Set<User> users,
+			Blob image, Set<Campusnews> campusnewses, Set<User> users,
 			Set<Grade> grades, Set<Chatroom> chatrooms) {
 		this.college = college;
 		this.majorName = majorName;
@@ -105,11 +108,11 @@ public class Major implements java.io.Serializable {
 	}
 
 	@Column(name = "image")
-	public String getImage() {
+	public Blob getImage() {
 		return this.image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(Blob image) {
 		this.image = image;
 	}
 

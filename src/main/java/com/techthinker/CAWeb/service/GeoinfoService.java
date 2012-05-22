@@ -32,12 +32,12 @@ public class GeoinfoService implements IGeoinfoService {
 	public void setGeoinfoDao(GeoinfoDao geoinfoDao) {
 		this.geoinfoDao = geoinfoDao;
 	}
-	
+
 	@Override
 	public void addGeoinfosFromInputStream(InputStream inputStream)
 			throws IOException {
-		double[] longtitude = new double[4];
-		double[] latitude = new double[4];
+		Double[] longtitude = new Double[4];
+		Double[] latitude = new Double[4];
 		BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 		br.readLine();
 		String r = br.readLine();
@@ -50,21 +50,20 @@ public class GeoinfoService implements IGeoinfoService {
 				longtitude[i] = Double.valueOf(local[1]);
 			}
 			
-			Geoinfo geoinfo = new Geoinfo();
-			geoinfo.setLatitude1(latitude[0]);
-			geoinfo.setLatitude2(latitude[1]);
-			geoinfo.setLatitude3(latitude[2]);
-			geoinfo.setLatitude4(latitude[3]);
-			geoinfo.setLongtitude1(longtitude[0]);
-			geoinfo.setLongtitude2(longtitude[1]);
-			geoinfo.setLongtitude3(longtitude[2]);
-			geoinfo.setLongtitude4(longtitude[3]);
-			geoinfo.setAvailabe(true);
+			Geoinfo geoinfo = new Geoinfo(longtitude,latitude,true);
 			geoinfos.add(geoinfo);
 			
 			r = br.readLine();
 		}
 		geoinfoDao.addGeoinfoList(geoinfos);
+	}
+
+	@Override
+	public Geoinfo addGeoinfoByLocation(Double[] longtitude, Double[] latitude,
+			boolean available) {
+		
+		Geoinfo geoinfo = new Geoinfo(longtitude,latitude,available);		
+		return geoinfoDao.add(geoinfo);
 	}
 
 }

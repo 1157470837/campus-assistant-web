@@ -1,14 +1,17 @@
 package com.techthinker.CAWeb.vo;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -41,7 +44,7 @@ public class User implements java.io.Serializable {
 	private Integer entranceYear;
 	private Timestamp birthday;
 	private String description;
-	private String image;
+	private Blob image;
 	private Set<Question> questions = new HashSet<Question>(0);
 	private Set<Campusnews> campusnewses = new HashSet<Campusnews>(0);
 	private Set<Spotcomment> spotcomments = new HashSet<Spotcomment>(0);
@@ -71,7 +74,7 @@ public class User implements java.io.Serializable {
 	public User(Geoinfo geoinfo, College college, Major major,
 			Usertype usertype, String username, String password, String sex,
 			String email, String phone, Integer entranceYear,
-			Timestamp birthday, String description, String image,
+			Timestamp birthday, String description, Blob image,
 			Set<Question> questions, Set<Campusnews> campusnewses,
 			Set<Spotcomment> spotcomments, Set<Relation> relationsForUserId1,
 			Set<Message> messagesForTouserId,
@@ -223,11 +226,11 @@ public class User implements java.io.Serializable {
 	}
 
 	@Column(name = "image")
-	public String getImage() {
+	public Blob getImage() {
 		return this.image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(Blob image) {
 		this.image = image;
 	}
 
