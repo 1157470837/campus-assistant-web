@@ -23,7 +23,7 @@ public class Message implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6485521301353185503L;
+	private static final long serialVersionUID = -6432912418392666212L;
 	private Integer messageId;
 	private User userByUserId;
 	private User userByTouserId;
@@ -36,6 +36,13 @@ public class Message implements java.io.Serializable {
 
 	/** default constructor */
 	public Message() {
+	}
+
+	/** minimal constructor */
+	public Message(String content, Timestamp pubdate, Integer totype) {
+		this.content = content;
+		this.pubdate = pubdate;
+		this.totype = totype;
 	}
 
 	/** full constructor */
@@ -62,7 +69,7 @@ public class Message implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id")
 	public User getUserByUserId() {
 		return this.userByUserId;
 	}
@@ -72,7 +79,7 @@ public class Message implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "touser_id", nullable = false)
+	@JoinColumn(name = "touser_id")
 	public User getUserByTouserId() {
 		return this.userByTouserId;
 	}
@@ -82,7 +89,7 @@ public class Message implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tochatroom_id", nullable = false)
+	@JoinColumn(name = "tochatroom_id")
 	public Chatroom getChatroom() {
 		return this.chatroom;
 	}

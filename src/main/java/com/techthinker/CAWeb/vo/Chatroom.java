@@ -1,16 +1,13 @@
 package com.techthinker.CAWeb.vo;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
-import java.sql.Blob;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,14 +26,14 @@ public class Chatroom implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -214209130405893843L;
+	private static final long serialVersionUID = -3555210794625444871L;
 	private Integer chatroomId;
 	private Grade grade;
 	private College college;
 	private Major major;
 	private String chatroomName;
 	private Integer parentroomId;
-	private Blob image;
+	private String image;
 	private Integer level;
 	private Set<Message> messages = new HashSet<Message>(0);
 
@@ -47,11 +44,7 @@ public class Chatroom implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Chatroom(Grade grade, College college, Major major,
-			String chatroomName, Integer parentroomId, Integer level) {
-		this.grade = grade;
-		this.college = college;
-		this.major = major;
+	public Chatroom(String chatroomName, Integer parentroomId, Integer level) {
 		this.chatroomName = chatroomName;
 		this.parentroomId = parentroomId;
 		this.level = level;
@@ -59,7 +52,7 @@ public class Chatroom implements java.io.Serializable {
 
 	/** full constructor */
 	public Chatroom(Grade grade, College college, Major major,
-			String chatroomName, Integer parentroomId, Blob image,
+			String chatroomName, Integer parentroomId, String image,
 			Integer level, Set<Message> messages) {
 		this.grade = grade;
 		this.college = college;
@@ -84,7 +77,7 @@ public class Chatroom implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "grade_id", nullable = false)
+	@JoinColumn(name = "grade_id")
 	public Grade getGrade() {
 		return this.grade;
 	}
@@ -94,7 +87,7 @@ public class Chatroom implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "college_id", nullable = false)
+	@JoinColumn(name = "college_id")
 	public College getCollege() {
 		return this.college;
 	}
@@ -104,7 +97,7 @@ public class Chatroom implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "major_id", nullable = false)
+	@JoinColumn(name = "major_id")
 	public Major getMajor() {
 		return this.major;
 	}
@@ -132,11 +125,11 @@ public class Chatroom implements java.io.Serializable {
 	}
 
 	@Column(name = "image")
-	public Blob getImage() {
+	public String getImage() {
 		return this.image;
 	}
 
-	public void setImage(Blob image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

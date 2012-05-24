@@ -8,19 +8,10 @@
 	<name>campusAssistant-web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
-	<!-- 中心仓库 -->
-	<repositories>
-		<repository>
-			<id>central</id>
-			<name>Central Repository</name>
-			<url>https://nexus.sourcesense.com/nexus/content/repositories/public</url>
-			<layout>default</layout>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
+	<!-- 中心仓库 <repositories> <repository> <id>central</id> <name>Central Repository</name> 
+		<url>https://nexus.sourcesense.com/nexus/content/repositories/public</url> 
+		<layout>default</layout> <snapshots> <enabled>false</enabled> </snapshots> 
+		</repository> </repositories> -->
 	<!-- 配置属性 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -101,21 +92,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>3.4.0.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-commons-annotations</artifactId>
-			<version>3.2.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.4.0.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>3.1.0.GA</version>
 		</dependency>
@@ -151,12 +127,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.5.8</version>
-		</dependency>
-
-		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
@@ -186,10 +156,17 @@
 		<!-- tika <dependency> <groupId>org.apache.tika</groupId> <artifactId>tika-app</artifactId> 
 			<version>1.1</version> </dependency> -->
 		<!--****************************底层依赖包**************************** -->
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.16</version>
+		</dependency>
+
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>2.4.2</version>
 		</dependency>
 
 		<dependency>
@@ -255,6 +232,21 @@
 			<artifactId>alt-jdk1.3</artifactId>
 			<version>0.07</version>
 		</dependency>
+
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.apache.axis2</groupId> <artifactId>axis2-jaxws</artifactId> 
+			<version>1.6.1</version> </dependency> 
+		<dependency>
+			<groupId>org.apache.neethi</groupId>
+			<artifactId>neethi</artifactId>
+			<version>3.0.2</version>
+		</dependency>-->
+		
 
 		<dependency>
 			<groupId>org.apache.axis2</groupId>
@@ -325,18 +317,22 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.4</version>
 				<configuration>
 					<encoding>utf-8</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<!-- war打包插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -344,6 +340,17 @@
 				<version>2.2</version>
 				<configuration>
 					<warName>campusAssistant-web</warName>
+				</configuration>
+			</plugin>
+
+			<!-- tomcat发布插件 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<server>myserver</server>
 				</configuration>
 			</plugin>
 

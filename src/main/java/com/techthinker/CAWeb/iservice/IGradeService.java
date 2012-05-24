@@ -1,6 +1,8 @@
 
 package com.techthinker.CAWeb.iservice;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import com.techthinker.CAWeb.util.PageObject;
@@ -56,5 +58,12 @@ public interface IGradeService {
 	 * @return
 	 */
 	public boolean checkGrade(String gradeName);
+	/**
+	 * 从输入流里读取专业信息，批量读取
+	 * @param inputStream
+	 * @throws IOException
+	 */
+	public void addGradeFromInputStream(InputStream inputStream)
+			throws IOException;
 
 }

@@ -1,7 +1,9 @@
 package com.techthinker.CAWeb.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,14 +12,27 @@ import org.springframework.stereotype.Service;
 
 import com.techthinker.CAWeb.exception.CollegeException;
 import com.techthinker.CAWeb.idao.ICollegeDao;
+import com.techthinker.CAWeb.idao.IScenicspotDao;
 import com.techthinker.CAWeb.iservice.ICollegeService;
 import com.techthinker.CAWeb.util.PageObject;
 import com.techthinker.CAWeb.vo.College;
+import com.techthinker.CAWeb.vo.Scenicspot;
 
 @Service("collegeService")
 public class CollegeService implements ICollegeService {
 
 	private ICollegeDao collegeDao;
+	private IScenicspotDao scenicspotDao;
+	
+	public IScenicspotDao getScenicspotDao() {
+		return scenicspotDao;
+	}
+
+	@Resource
+	public void setScenicspotDao(IScenicspotDao scenicspotDao) {
+		this.scenicspotDao = scenicspotDao;
+	}
+
 	public ICollegeDao getCollegeDao() {
 		return collegeDao;
 	}
@@ -81,7 +96,21 @@ public class CollegeService implements ICollegeService {
 	@Override
 	public void addCollegeFromInputStream(InputStream inputStream)
 			throws IOException {
-		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				inputStream));
+		String r = br.readLine();
+		r = br.readLine();
+		while( r!=null && r.contains("----------")){
+			College c = new College();
+			c.setCollegeName(br.readLine().trim());
+			c.setDescription(br.readLine().trim());
+			String spotName = br.readLine().trim();
+			Scenicspot scenicspot = scenicspotDao.loadByHql("from Scenicspot where spotname=?",spotName);
+			c.setScenicspot(scenicspot);
+			collegeDao.add(c);
+			
+			r = br.readLine();
+		}
 
 	}
 

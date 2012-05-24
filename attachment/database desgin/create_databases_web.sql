@@ -194,9 +194,9 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`chatroom` (
   `chatroom_name` VARCHAR(30) NOT NULL ,
   `parentroom_id` INT NOT NULL ,
   `image` BLOB NULL ,
-  `college_id` INT NOT NULL ,
-  `major_id` INT NOT NULL ,
-  `grade_id` INT NOT NULL ,
+  `college_id` INT NULL ,
+  `major_id` INT NULL ,
+  `grade_id` INT NULL ,
   `level` INT NOT NULL ,
   PRIMARY KEY (`chatroom_id`) ,
   INDEX `chatroom_college_id` (`college_id` ASC) ,
@@ -227,9 +227,9 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`message` (
   `message_id` INT NOT NULL AUTO_INCREMENT ,
   `content` TEXT NOT NULL ,
   `pubdate` DATETIME NOT NULL ,
-  `user_id` INT NOT NULL ,
-  `touser_id` INT NOT NULL ,
-  `tochatroom_id` INT NOT NULL ,
+  `user_id` INT NULL ,
+  `touser_id` INT NULL ,
+  `tochatroom_id` INT NULL ,
   `totype` INT NOT NULL ,
   PRIMARY KEY (`message_id`) ,
   INDEX `message_user_id` (`user_id` ASC) ,
@@ -243,8 +243,8 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`message` (
   CONSTRAINT `message_touser_id`
     FOREIGN KEY (`touser_id` )
     REFERENCES `campusAssistant_web`.`user` (`user_id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
   CONSTRAINT `message_chatroom_id`
     FOREIGN KEY (`tochatroom_id` )
     REFERENCES `campusAssistant_web`.`chatroom` (`chatroom_id` )
@@ -262,8 +262,8 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`campusnews` (
   `content` TEXT NOT NULL ,
   `pubdate` DATETIME NOT NULL ,
   `user_id` INT NULL ,
-  `college_id` INT NOT NULL ,
-  `major_id` INT NOT NULL ,
+  `college_id` INT NULL ,
+  `major_id` INT NULL ,
   `level` INT NOT NULL ,
   PRIMARY KEY (`campusnew_id`) ,
   INDEX `campus_user_id` (`user_id` ASC) ,

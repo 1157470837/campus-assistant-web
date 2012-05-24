@@ -12,10 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * CampusNews entity. @author MyEclipse Persistence Tools
+ * Campusnews entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "CampusNews", catalog = "campusassistant_web")
+@Table(name = "campusnews", catalog = "campusassistant_web")
 public class Campusnews implements java.io.Serializable {
 
 	// Fields
@@ -23,7 +23,7 @@ public class Campusnews implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6742786879679315019L;
+	private static final long serialVersionUID = 1486281974556682691L;
 	private Integer campusnewId;
 	private User user;
 	private College college;
@@ -37,6 +37,15 @@ public class Campusnews implements java.io.Serializable {
 
 	/** default constructor */
 	public Campusnews() {
+	}
+
+	/** minimal constructor */
+	public Campusnews(Integer newstype, String content, Timestamp pubdate,
+			Integer level) {
+		this.newstype = newstype;
+		this.content = content;
+		this.pubdate = pubdate;
+		this.level = level;
 	}
 
 	/** full constructor */
@@ -64,7 +73,7 @@ public class Campusnews implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id")
 	public User getUser() {
 		return this.user;
 	}
@@ -74,7 +83,7 @@ public class Campusnews implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "college_id", nullable = false)
+	@JoinColumn(name = "college_id")
 	public College getCollege() {
 		return this.college;
 	}
@@ -84,7 +93,7 @@ public class Campusnews implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "major_id", nullable = false)
+	@JoinColumn(name = "major_id")
 	public Major getMajor() {
 		return this.major;
 	}

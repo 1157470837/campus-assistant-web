@@ -19,8 +19,8 @@ public class TestUserService {
 	
 	@BeforeClass
 	public static void init() {
-		factory = new ClassPathXmlApplicationContext("beans.xml");
-		userService = (UserService)factory.getBean("userService");
+//		factory = new ClassPathXmlApplicationContext("beans.xml");
+//		userService = (UserService)factory.getBean("userService");
 	}
 	
 //	@Test

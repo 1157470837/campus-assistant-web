@@ -1,31 +1,36 @@
 package com.techthinker.CAWeb.test;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.techthinker.CAWeb.iservice.IGeoinfoService;
+import com.techthinker.CAWeb.iservice.IMajorService;
 
+public class TestMajorService {
 
-public class TestGeoinfoService {
 	private static BeanFactory factory;
-	private static IGeoinfoService geoinfoService;
-	
+	private static IMajorService majorService;
+
 	@BeforeClass
 	public static void init() {
 //		factory = new ClassPathXmlApplicationContext("beans.xml");
-//		geoinfoService = (IGeoinfoService)factory.getBean("geoinfoService");
+//		majorService = (IMajorService) factory.getBean("majorService");
 	}
-	
+
 	@Test
-	public void testPushGeoinfos() {
+	public void testAddMajorFromInputStream() {
+//		InputStream inputStream = this.getClass().getClassLoader()
+//				.getResourceAsStream("majorInfo.txt");
 //		try {
-//			geoinfoService.addGeoinfosFromInputStream(this.getClass().getClassLoader().getResourceAsStream("scenicspots.txt"));
+//			majorService.addMajorFromInputStream(inputStream);
 //		} catch (IOException e) {
+//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 	}
+
 }

@@ -1,28 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER. Copyright 2000-2007 
-	Sun Microsystems, Inc. All rights reserved. The contents of this file are 
-	subject to the terms of either the GNU General Public License Version 2 only 
-	("GPL") or the Common Development and Distribution License("CDDL") (collectively, 
-	the "License"). You may not use this file except in compliance with the License. 
-	You can obtain a copy of the License at https://glassfish.dev.java.net/public/CDDL+GPL.html 
-	or glassfish/bootstrap/legal/LICENSE.txt. See the License for the specific 
-	language governing permissions and limitations under the License. When distributing 
-	the software, include this License Header Notice in each file and include 
-	the License file at glassfish/bootstrap/legal/LICENSE.txt. Sun designates 
-	this particular file as subject to the "Classpath" exception as provided 
-	by Sun in the GPL Version 2 section of the License file that accompanied 
-	this code. If applicable, add the following below the License Header, with 
-	the fields enclosed by brackets [] replaced by your own identifying information: 
-	"Portions Copyrighted [year] [name of copyright owner]" Contributor(s): If 
-	you wish your version of this file to be governed by only the CDDL or only 
-	the GPL Version 2, indicate your decision by adding "[Contributor] elects 
-	to include this software in this distribution under the [CDDL or GPL Version 
-	2] license." If you don't indicate a single choice of license, a recipient 
-	has the option to distribute your version of this file under either the CDDL, 
-	the GPL Version 2 or to extend the choice of license to its licensees as 
-	provided above. However, if you add GPL Version 2 code and therefore, elected 
-	the GPL Version 2 license, then the option applies only if the new code is 
-	made subject to such option by the copyright holder. -->
 <web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee"
 	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<javaee:display-name>Campus Assistant Web Application
@@ -45,7 +21,7 @@
 	
 	<!-- 操作Session时激发listener-class -->
 	<listener>
-		<listener-class>com.techthinker.CAWeb.web.</listener-class>
+		<listener-class>com.techthinker.CAWeb.web.CAWebSessionListener</listener-class>
 	</listener>
 	
 	<!-- 字符编码过滤器 -->
@@ -96,7 +72,7 @@
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	
-	<!-- Struts文过滤器 -->
+	<!-- Struts过滤器 -->
 	<filter>
 		<filter-name>struts-prepare</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter</filter-class>
@@ -115,7 +91,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- sitemesh文过滤器 -->
+	<!-- sitemesh
 	<filter>
 		<filter-name>sitemesh</filter-name>
 		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
@@ -124,6 +100,7 @@
 		<filter-name>sitemesh</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	文过滤器 -->
 	
 	<!-- 项目加载运行InitServlet -->
 	<servlet>
@@ -131,4 +108,29 @@
 		<servlet-class>com.techthinker.CAWeb.web.InitServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+	<!-- 项目加载运行Axis Web Service -->
+	<servlet>
+        <servlet-name>AxisServlet</servlet-name>
+        <display-name>Apache-Axis Servlet</display-name>
+        <servlet-class>org.apache.axis2.transport.http.AxisServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!-- 用于接收从本地上传的服务部署文件 -->
+    <servlet-mapping>
+        <servlet-name>AxisServlet</servlet-name>
+        <url-pattern>/servlet/AxisServlet</url-pattern>
+    </servlet-mapping>
+    <!-- 用于发布即时服务 -->
+    <servlet-mapping>
+        <servlet-name>AxisServlet</servlet-name>
+        <url-pattern>*.jws</url-pattern>
+    </servlet-mapping>
+    <!-- 用于发布定制服务 -->
+    <servlet-mapping>
+        <servlet-name>AxisServlet</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
+    
+   
 </web-app>
