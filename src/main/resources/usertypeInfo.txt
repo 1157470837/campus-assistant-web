@@ -1,0 +1,5 @@
+﻿--------------user:username,sex,password,email,user_type,college_id,major_id,entrance_year,birthday,phone,description,image,geoinfo_id------------------------------------
+------------------------------------------------------------------------------------------------------
+匿名用户,1
+普通用户,2
+超级管理员,3

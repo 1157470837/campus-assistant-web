@@ -1,34 +1,36 @@
 package com.techthinker.CAWeb.test;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.techthinker.CAWeb.iservice.IUserService;
+import com.techthinker.CAWeb.iservice.IChatroomService;
 
-public class TestUserService {
+public class TestChatroomService {
 
 	private static BeanFactory factory;
-	private static IUserService userService;
-	
+	private static IChatroomService chatroomService;
+
 	@BeforeClass
 	public static void init() {
 //		factory = new ClassPathXmlApplicationContext("beans.xml");
-//		userService = (IUserService)factory.getBean("userService");
+//		chatroomService = (IChatroomService) factory.getBean("chatroomService");
 	}
-	
+
 	@Test
-	public void testAddUserFromInputStream() {
+	public void testAddCollegeFromInputStream() {
 //		InputStream inputStream = this.getClass().getClassLoader()
-//				.getResourceAsStream("userInfo.txt");
+//				.getResourceAsStream("chatroomInfo.txt");
 //		try {
-//			userService.addUserFromInputStream(inputStream);
+//			chatroomService.addCollegeFromInputStream(inputStream);
 //		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		// fail("Not yet implemented");
 	}
 
 }

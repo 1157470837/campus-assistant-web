@@ -1,21 +1,50 @@
 package com.techthinker.CAWeb.service;
 
-import java.util.Date;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.techthinker.CAWeb.idao.IChatroomDao;
 import com.techthinker.CAWeb.idao.IMessageDao;
+import com.techthinker.CAWeb.idao.IUserDao;
 import com.techthinker.CAWeb.iservice.IMessageService;
 import com.techthinker.CAWeb.util.PageObject;
+import com.techthinker.CAWeb.vo.Chatroom;
 import com.techthinker.CAWeb.vo.Message;
+import com.techthinker.CAWeb.vo.User;
 
 @Service("messageService")
 public class MessageService implements IMessageService {
 
 	private IMessageDao messageDao;
+	private IUserDao userDao;
+	private IChatroomDao chatroomDao;
+	public IUserDao getUserDao() {
+		return userDao;
+	}
+
+	@Resource
+	public void setUserDao(IUserDao userDao) {
+		this.userDao = userDao;
+	}
+
+
+	public IChatroomDao getChatroomDao() {
+		return chatroomDao;
+	}
+
+	@Resource
+	public void setChatroomDao(IChatroomDao chatroomDao) {
+		this.chatroomDao = chatroomDao;
+	}
+
 	public IMessageDao getMessageDao() {
 		return messageDao;
 	}
@@ -54,28 +83,29 @@ public class MessageService implements IMessageService {
 	}
 
 	@Override
-	public PageObject<Message> find(int userId, Date pubDate, int toChatroomId,
-			int toUserId, int toType) {
-		StringBuilder hql = new StringBuilder("from Message where ");
-		if(userId != 0) {
-			hql.append("userId = " + userId);
-		}
-		if(pubDate != null) {
-			hql.append("pubDate = " + pubDate);
-		}
-		if(toChatroomId != 0) {
-			hql.append("toChatroomId = " + toChatroomId);
-		}
-		if(toUserId != 0) {
-			hql.append("toUserId = " + toUserId);
-		}
-		if(toType != 0) {
-			hql.append("toType = " + toType);
-		}
-		return this.messageDao.find(hql.toString());
+	public PageObject<Message> find(Message msg) {
+		
+//		StringBuilder hql = new StringBuilder("from Message where ");
+//		if(msg != 0) {
+//			hql.append("userId = " + userId);
+//		}
+//		if(pubDate != null) {
+//			hql.append("pubDate = " + pubDate);
+//		}
+//		if(toChatroomId != 0) {
+//			hql.append("toChatroomId = " + toChatroomId);
+//		}
+//		if(toUserId != 0) {
+//			hql.append("toUserId = " + toUserId);
+//		}
+//		if(toType != 0) {
+//			hql.append("toType = " + toType);
+//		}
+//		return this.messageDao.find(hql.toString());
+		return null;
 	}
 
-	@Override
+	@Override 
 	public Message load(int id) {
 		return this.messageDao.load(id);
 	}
@@ -85,6 +115,44 @@ public class MessageService implements IMessageService {
 		return this.messageDao.list("from Message");
 	}
 
+	@Override
+	public void addMessageFromInputStream(InputStream inputStream)
+			throws IOException {
 
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				inputStream));
+		String r = br.readLine();
+		Message msg = null;
+		User userByUserId = null;
+		User userByTouserId = null;
+		Chatroom croom = null;
+		int toType = 0;
+		
+		r = br.readLine();
+		while( r!=null ){
+			if(r.contains("----------")){
+				r = br.readLine();
+			}
+			msg = new Message();
+			toType = Integer.parseInt(r.trim());
+			msg.setTotype(toType);
+			userByUserId = userDao.loadByHql("from User where username = ?", br.readLine().trim());
+			msg.setUserByUserId(userByUserId);
+			msg.setContent(br.readLine().trim());
+			msg.setPubdate(Timestamp.valueOf(br.readLine().trim()+" 00:00:00"));
+			if(toType == 1){
+				croom = chatroomDao.loadByHql("from Chatroom where chatroomName = ?", br.readLine().trim());
+				msg.setChatroom(croom);
+			}else if(toType ==2){
+				userByTouserId = userDao.loadByHql("from User where username = ?", br.readLine().trim());
+				 msg.setUserByTouserId(userByTouserId);
+			}
+			
+			messageDao.add(msg);
+
+			r = br.readLine();
+		}
+
+	}
 
 }

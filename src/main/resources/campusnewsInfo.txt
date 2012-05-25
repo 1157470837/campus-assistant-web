@@ -1,0 +1,31 @@
+﻿--------------campusnews:uewstype,content,pubdate,user_id,college_id,major_id,level------------------------------------
+------------------------------------------------------------------------------------------------------
+1
+struts+spring+hibernate初学者问题 illegally ...open session in view 过滤器 //订单manager private OrderManager mgr
+2012-01-13
+蔡鑫
+3
+------------------------------------------------------------------------------------------------------
+1
+illegally attempted to associate a proxy with two open Sessi RSS ...But I don't have any ideas to solve the problem. I would be much
+2012-01-13
+曹洲
+1
+------------------------------------------------------------------------------------------------------
+1
+我在service层调用的时候总是报异常：illegally attempted to associate a proxy with two open Sessions 我如果保存别的没有关联对象的实体就
+2012-01-13
+陈小辉
+2
+------------------------------------------------------------------------------------------------------
+1
+illegally attempted to associate a proxy with two open Sessions
+2012-01-13
+程馨莹
+3
+------------------------------------------------------------------------------------------------------
+2
+欢迎使用
+2012-05-24
+程馨莹
+2

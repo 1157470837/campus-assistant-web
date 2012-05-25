@@ -1,11 +1,8 @@
 package com.techthinker.CAWeb.test;
 
-import java.io.IOException;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.techthinker.CAWeb.iservice.IGeoinfoService;
 

@@ -55,6 +55,6 @@ public interface ICampusnewsService {
 	 * @param inputStream
 	 * @throws IOException
 	 */
-	public void addCollegeFromInputStream(InputStream inputStream)
+	public void addCampusnewsFromInputStream(InputStream inputStream)
 			throws IOException;
 }

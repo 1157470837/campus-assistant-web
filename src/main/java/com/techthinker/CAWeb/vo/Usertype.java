@@ -24,9 +24,10 @@ public class Usertype implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -905605613100028269L;
+	private static final long serialVersionUID = 837789390677982926L;
 	private Integer usertypeId;
-	private Integer usertypeName;
+	private String usertypeName;
+	private Integer usertypeNum;
 	private Set<User> users = new HashSet<User>(0);
 
 	// Constructors
@@ -36,13 +37,15 @@ public class Usertype implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Usertype(Integer usertypeName) {
+	public Usertype(String usertypeName, Integer usertypeNum) {
 		this.usertypeName = usertypeName;
+		this.usertypeNum = usertypeNum;
 	}
 
 	/** full constructor */
-	public Usertype(Integer usertypeName, Set<User> users) {
+	public Usertype(String usertypeName, Integer usertypeNum, Set<User> users) {
 		this.usertypeName = usertypeName;
+		this.usertypeNum = usertypeNum;
 		this.users = users;
 	}
 
@@ -58,13 +61,22 @@ public class Usertype implements java.io.Serializable {
 		this.usertypeId = usertypeId;
 	}
 
-	@Column(name = "usertype_name", nullable = false)
-	public Integer getUsertypeName() {
+	@Column(name = "usertype_name", nullable = false, length = 30)
+	public String getUsertypeName() {
 		return this.usertypeName;
 	}
 
-	public void setUsertypeName(Integer usertypeName) {
+	public void setUsertypeName(String usertypeName) {
 		this.usertypeName = usertypeName;
+	}
+
+	@Column(name = "usertype_num", nullable = false)
+	public Integer getUsertypeNum() {
+		return this.usertypeNum;
+	}
+
+	public void setUsertypeNum(Integer usertypeNum) {
+		this.usertypeNum = usertypeNum;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usertype")

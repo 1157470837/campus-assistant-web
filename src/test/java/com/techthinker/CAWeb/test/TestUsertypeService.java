@@ -1,28 +1,31 @@
 package com.techthinker.CAWeb.test;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.techthinker.CAWeb.iservice.IGradeService;
+import com.techthinker.CAWeb.iservice.IUsertypeService;
 
-public class TestGradeService {
-
+public class TestUsertypeService {
 	private static BeanFactory factory;
-	private static IGradeService gradeService;
-
+	private static IUsertypeService usertypeService;
+	
 	@BeforeClass
 	public static void init() {
 //		factory = new ClassPathXmlApplicationContext("beans.xml");
-//		gradeService = (IGradeService) factory.getBean("gradeService");
+//		usertypeService = (IUsertypeService)factory.getBean("usertypeService");
 	}
-
+	
 	@Test
-	public void testAddGradeFromInputStream() {
+	public void testAddUserFromInputStream() {
 //		InputStream inputStream = this.getClass().getClassLoader()
-//				.getResourceAsStream("gradeInfo.txt");
+//				.getResourceAsStream("usertypeInfo.txt");
 //		try {
-//			gradeService.addGradeFromInputStream(inputStream);
+//			usertypeService.addUsertypeFromInputStream(inputStream);
 //		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();

@@ -1,34 +1,41 @@
 package com.techthinker.CAWeb.test;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.techthinker.CAWeb.iservice.IUserService;
+import com.techthinker.CAWeb.iservice.IMessageService;
 
-public class TestUserService {
+public class TestMessageService {
 
 	private static BeanFactory factory;
-	private static IUserService userService;
-	
+	private static IMessageService messageService;
+
 	@BeforeClass
 	public static void init() {
 //		factory = new ClassPathXmlApplicationContext("beans.xml");
-//		userService = (IUserService)factory.getBean("userService");
+//		messageService = (IMessageService) factory.getBean("messageService");
 	}
-	
+
 	@Test
-	public void testAddUserFromInputStream() {
+	public void testFind() {
+		// fail("Not yet implemented");
+	}
+
+	@Test
+	public void testAddMessageFromInputStream() {
 //		InputStream inputStream = this.getClass().getClassLoader()
-//				.getResourceAsStream("userInfo.txt");
+//				.getResourceAsStream("messageInfo.txt");
 //		try {
-//			userService.addUserFromInputStream(inputStream);
+//			messageService.addMessageFromInputStream(inputStream);
 //		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		// fail("Not yet implemented");
 	}
 
 }

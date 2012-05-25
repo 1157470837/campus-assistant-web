@@ -239,14 +239,17 @@
 			<version>1.1</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.apache.axis2</groupId> <artifactId>axis2-jaxws</artifactId> 
-			<version>1.6.1</version> </dependency> 
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-jaxws</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.neethi</groupId>
 			<artifactId>neethi</artifactId>
 			<version>3.0.2</version>
-		</dependency>-->
-		
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.axis2</groupId>
@@ -265,6 +268,13 @@
 			<artifactId>axis2-transport-http</artifactId>
 			<version>1.6.2</version>
 		</dependency>
+		
+		<dependency>
+		<groupId>org.apache.axis2</groupId>
+		<artifactId>axis2-spring</artifactId>
+		<version>1.6.2</version>
+	</dependency>
+		
 	</dependencies>
 
 	<!-- 生成测试报告 -->

@@ -1,0 +1,91 @@
+﻿--------------message:totype,user_id,content,pubdate,touser_id,tochatroom_id------------------------------------
+------------------------------------------------------------------------------------------------------
+2
+蒋超
+struts+spring+hibernate初学者问题 illegally ...open session in view 过滤器 //订单manager private OrderManager mgr
+2012-01-13
+蔡鑫
+------------------------------------------------------------------------------------------------------
+2
+蒋超
+illegally attempted to associate a proxy with two open Sessi RSS ...But I don't have any ideas to solve the problem. I would be much
+2012-01-13
+曹洲
+------------------------------------------------------------------------------------------------------
+2
+蒋超
+我在service层调用的时候总是报异常：illegally attempted to associate a proxy with two open Sessions 我如果保存别的没有关联对象的实体就
+2012-01-13
+陈小辉
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessions asdfgghfgsdads
+2012-01-13
+信息学院
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessions  agfsgwergrf
+2012-01-13
+信息学院
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessionsqg qerwgsdgfsdfg asgfsdg
+2012-01-13
+信息学院
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessions  qdfafsgsfgsfdadsfqsdgasgasd
+2012-01-13
+计算机科学与技术系
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessionsq gqwerfqdsfa
+2012-01-13
+信息学院
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessions adgfqgqwergqwer
+2012-01-13
+计算机科学与技术系
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessions
+2012-01-13
+应用数学系
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessions  dgfdsgsq
+2012-01-13
+信息学院
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessions3weweqe
+2012-01-13
+信息学院
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessions adfadsf d
+2012-01-13
+信息学院
+------------------------------------------------------------------------------------------------------
+1
+蒋超
+illegally attempted to associate a proxy with two open Sessions qewqwgsdsd
+2012-01-13
+信息学院
+------------------------------------------------------------------------------------------------------
+2
+蒋超
+欢迎使用
+2012-05-24
+程馨莹

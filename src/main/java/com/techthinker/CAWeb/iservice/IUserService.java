@@ -1,5 +1,7 @@
 package com.techthinker.CAWeb.iservice;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import com.techthinker.CAWeb.util.PageObject;
@@ -62,4 +64,10 @@ public interface IUserService {
 	 * @return
 	 */
 	public boolean checkUser(String userName);
+	/**
+	 * 从输入流中批量读取User信息，并插入数据库
+	 * @param inputStream 输入流
+	 * @throws IOException IO异常
+	 */
+	public void addUserFromInputStream(InputStream inputStream)throws IOException;
 }

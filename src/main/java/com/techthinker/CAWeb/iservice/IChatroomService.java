@@ -62,6 +62,6 @@ public interface IChatroomService {
 	 * @param inputStream
 	 * @throws IOException
 	 */
-	public void addCollegeFromInputStream(InputStream inputStream)
+	public void addChatroomFromInputStream(InputStream inputStream)
 			throws IOException;
 }

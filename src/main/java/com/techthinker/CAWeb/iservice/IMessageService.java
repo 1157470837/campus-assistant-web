@@ -1,6 +1,7 @@
 package com.techthinker.CAWeb.iservice;
 
-import java.util.Date;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import com.techthinker.CAWeb.util.PageObject;
@@ -41,14 +42,16 @@ public interface IMessageService {
 	 */
 	public List<Message> list();
 	/**
-	 * 根据分页获取消息信息
-	 * @param pageOffset 从哪一个位置开始查询
-	 * @param pageSize 每页显示多少条
+	 * 根据条件获取分页消息信息
+	 * @param msg 消息模板
 	 * @return
 	 */
-	public PageObject<Message> find(int userId,
-									Date pubDate,
-									int toChatroomId,
-									int toUserId,
-									int toType);
+	public PageObject<Message> find(Message msg);
+	/**
+	 * 从输入流里读取信息，批量读取
+	 * @param inputStream
+	 * @throws IOException
+	 */
+	public void addMessageFromInputStream(InputStream inputStream)
+			throws IOException;
 }

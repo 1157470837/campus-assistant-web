@@ -5,30 +5,34 @@ import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.techthinker.CAWeb.iservice.IUserService;
+import com.techthinker.CAWeb.iservice.ICampusnewsService;
 
-public class TestUserService {
+public class TestCampusService {
 
 	private static BeanFactory factory;
-	private static IUserService userService;
+	private static ICampusnewsService campusnewsService;
 	
 	@BeforeClass
 	public static void init() {
 //		factory = new ClassPathXmlApplicationContext("beans.xml");
-//		userService = (IUserService)factory.getBean("userService");
+//		campusnewsService = (ICampusnewsService)factory.getBean("campusnewsService");
 	}
-	
 	@Test
-	public void testAddUserFromInputStream() {
+	public void testFind() {
+		//fail("Not yet implemented");
+	}
+
+	@Test
+	public void testAddCollegeFromInputStream() {
 //		InputStream inputStream = this.getClass().getClassLoader()
-//				.getResourceAsStream("userInfo.txt");
+//				.getResourceAsStream("campusnewsInfo.txt");
 //		try {
-//			userService.addUserFromInputStream(inputStream);
+//			campusnewsService.addCollegeFromInputStream(inputStream);
 //		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		// fail("Not yet implemented");
+		
 	}
 
 }

@@ -32,9 +32,9 @@ public class CleanListener implements ServletContextListener {
 		System.out.println("------------------清理的启动程序已经开启（已经获取了"+wac+"）---------------------");
 		realPath = sce.getServletContext().getRealPath("");
 		timer = new Timer();
-		timer.scheduleAtFixedRate(new ClearDataTask(),50000, 300000);
+		timer.scheduleAtFixedRate(new ClearDataTask(),50000, 60000);
 		indexTimer = new Timer();
-		indexTimer.scheduleAtFixedRate(new IndexCommit(), 600000, 600000);
+		indexTimer.scheduleAtFixedRate(new IndexCommit(), 50000, 60000);
 	}
 	
 	/**

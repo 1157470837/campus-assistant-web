@@ -86,7 +86,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`usertype` (
   `usertype_id` INT NOT NULL AUTO_INCREMENT ,
-  `usertype_name` INT NOT NULL ,
+  `usertype_name` VARCHAR(30) NOT NULL ,
+  `usertype_num` INT NOT NULL ,
   PRIMARY KEY (`usertype_id`) )
 ENGINE = InnoDB;
 
