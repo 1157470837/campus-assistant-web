@@ -13,10 +13,13 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.techthinker.CAWeb.idao.ICampusnewsDao;
+import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.idao.IUserDao;
 import com.techthinker.CAWeb.iservice.ICampusnewsService;
+import com.techthinker.CAWeb.util.IndexUtil;
 import com.techthinker.CAWeb.util.PageObject;
 import com.techthinker.CAWeb.vo.Campusnews;
+import com.techthinker.CAWeb.vo.TempIndex;
 import com.techthinker.CAWeb.vo.User;
 
 @Service("campusnewsService")
@@ -24,6 +27,23 @@ public class CampusnewsService implements ICampusnewsService {
 
 	private ICampusnewsDao campusnewsDao;
 	private IUserDao userDao;
+	private ITempIndexDao tempIndexDao;
+
+	/**
+	 * @return the tempIndexDao
+	 */
+	public ITempIndexDao getTempIndexDao() {
+		return tempIndexDao;
+	}
+
+	/**
+	 * @param tempIndexDao
+	 *            the tempIndexDao to set
+	 */
+	@Resource
+	public void setTempIndexDao(ITempIndexDao tempIndexDao) {
+		this.tempIndexDao = tempIndexDao;
+	}
 
 	public IUserDao getUserDao() {
 		return userDao;
@@ -103,6 +123,11 @@ public class CampusnewsService implements ICampusnewsService {
 			cn.setLevel(Integer.parseInt(br.readLine().trim()));
 			
 			campusnewsDao.add(cn);
+			TempIndex tempIndex = new TempIndex();
+			tempIndex.setAdd();
+			tempIndex.setObjId(cn.getCampusnewId());
+			tempIndex.setObjType(IndexUtil.ACTION_CAMPUSNEWS);
+			tempIndexDao.add(tempIndex);
 
 			r = br.readLine();
 		}

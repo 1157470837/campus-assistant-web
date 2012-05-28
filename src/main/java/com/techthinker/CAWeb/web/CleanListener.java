@@ -65,7 +65,7 @@ public class CleanListener implements ServletContextListener {
 			SystemContext.setRealPath(realPath);
 			System.out.println("索引进行了提交"+new Date());
 			IIndexService indexService = (IIndexService)wac.getBean("indexService");
-			indexService.updateCommitIndex();
+			indexService.updateSetIndex();
 		}
 	}
 	

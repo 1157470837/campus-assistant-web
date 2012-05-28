@@ -41,7 +41,7 @@ public class SystemContextFilter implements Filter {
 			SystemContext.setPageOffset(pageOffset);
 			SystemContext.setOrder(order);
 			SystemContext.setSort(sort);
-			SystemContext.setRealPath(((HttpServletRequest)req).getSession().getServletContext().getRealPath(""));
+			SystemContext.setRealPath(((HttpServletRequest)req).getSession().getServletContext().getRealPath("/"));
 			chain.doFilter(req, resp);
 		} finally {
 			SystemContext.removePageOffset();

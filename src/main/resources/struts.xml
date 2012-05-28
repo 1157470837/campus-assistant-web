@@ -12,19 +12,19 @@
 
 	<package name="default" namespace="/" extends="struts-default">
 		<!-- 配置了全局异常处理 -->
-		<global-results>
-			<result name="login">/WEB-INF/jsp/user/loginInput.jsp</result>
+		<!--<global-results>
+			<result name="login">/WEB-INF/jsp/user/login.jsp</result>
 			<result name="list">/WEB-INF/jsp/.../list.jsp</result>
 			<result name="findException">/.../error.jsp</result>
 		</global-results>
 		<global-exception-mappings>
 			<exception-mapping result="findException"
 				exception="com.techthinker.CAWeb.exception.MessageException" />
-		</global-exception-mappings>
+		</global-exception-mappings>-->
 		<action name="*_*" class="{1}Action" method="{2}">
 			<result name="success">/WEB-INF/jsp/{1}/{2}.jsp</result>
-			<result name="input">/WEB-INF/jsp/{1}/{2}Input.jsp</result>
-			<!-- <result name="redirect" type="redirect">/${#urlAction}</result> -->
+			<!--<result name="input">/WEB-INF/jsp/{1}/{2}Input.jsp</result>
+			 <result name="redirect" type="redirect">/${#urlAction}</result> -->
 		</action>
 	</package>
 </struts>

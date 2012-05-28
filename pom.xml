@@ -8,10 +8,18 @@
 	<name>campusAssistant-web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
-	<!-- 中心仓库 <repositories> <repository> <id>central</id> <name>Central Repository</name> 
-		<url>https://nexus.sourcesense.com/nexus/content/repositories/public</url> 
-		<layout>default</layout> <snapshots> <enabled>false</enabled> </snapshots> 
-		</repository> </repositories> -->
+	<!-- 中心仓库 -->
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>http://repository.sonatype.org/content/groups/public/</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<!-- 配置属性 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -48,20 +56,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- xwork -->
-		<dependency>
-			<groupId>org.apache.struts.xwork</groupId>
-			<artifactId>xwork-core</artifactId>
-			<version>2.3.3</version>
-		</dependency>
-
-		<!-- struts -->
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-core</artifactId>
-			<version>2.3.1.2</version>
-		</dependency>
-
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -82,6 +76,19 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>1.6.12</version>
+		</dependency>
+		<!-- xwork <dependency> <groupId>org.apache.struts.xwork</groupId> <artifactId>xwork-core</artifactId> 
+			<version>2.3.3</version> </dependency> -->
+		<!-- struts -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>2.3.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-spring-plugin</artifactId>
+			<version>2.3.3</version>
 		</dependency>
 
 		<!-- hibernate -->
@@ -152,6 +159,24 @@
 			<artifactId>solr-solrj</artifactId>
 			<version>3.6.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.1.3</version>
+		</dependency>
+
+		<!-- IK analyzer <dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-core</artifactId> 
+			<version>3.6.0</version> </dependency> -->
+		<dependency>
+			<groupId>com.techthinker.CAWeb</groupId>
+			<artifactId>IKAnalyzer2012</artifactId>
+			<version>2012_u5</version>
+		</dependency>
 
 		<!-- tika <dependency> <groupId>org.apache.tika</groupId> <artifactId>tika-app</artifactId> 
 			<version>1.1</version> </dependency> -->
@@ -162,12 +187,13 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.16</version>
 		</dependency>
-
+		
+		<!--
 		<dependency>
 			<groupId>opensymphony</groupId>
 			<artifactId>sitemesh</artifactId>
 			<version>2.4.2</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -214,7 +240,13 @@
 			<artifactId>commons-pool</artifactId>
 			<version>20030825.183949</version>
 		</dependency>
-
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		
+		<!-- 
 		<dependency>
 			<groupId>org.ow2.orchestra.eclipse.birt</groupId>
 			<artifactId>org.ow2.orchestra.eclipse.birt.chart.engine</artifactId>
@@ -232,6 +264,7 @@
 			<artifactId>alt-jdk1.3</artifactId>
 			<version>0.07</version>
 		</dependency>
+		 -->
 
 		<dependency>
 			<groupId>javax.activation</groupId>
@@ -244,7 +277,7 @@
 			<artifactId>axis2-jaxws</artifactId>
 			<version>1.6.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.neethi</groupId>
 			<artifactId>neethi</artifactId>
@@ -268,13 +301,13 @@
 			<artifactId>axis2-transport-http</artifactId>
 			<version>1.6.2</version>
 		</dependency>
-		
+
 		<dependency>
-		<groupId>org.apache.axis2</groupId>
-		<artifactId>axis2-spring</artifactId>
-		<version>1.6.2</version>
-	</dependency>
-		
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-spring</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<!-- 生成测试报告 -->
@@ -343,26 +376,13 @@
 				</configuration>
 			</plugin>
 
-			<!-- war打包插件 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<warName>campusAssistant-web</warName>
-				</configuration>
-			</plugin>
+			<!-- war打包插件 <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
+				<version>2.2</version> <configuration> <warName>campusAssistant-web</warName> 
+				</configuration> </plugin> -->
 
-			<!-- tomcat发布插件 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.1</version>
-				<configuration>
-					<url>http://localhost:8080/manager/text</url>
-					<server>myserver</server>
-				</configuration>
-			</plugin>
+			<!-- tomcat发布插件 <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>tomcat-maven-plugin</artifactId> 
+				<version>1.1</version> <configuration> <url>http://localhost:8080/manager/text</url> 
+				<server>myserver</server> </configuration> </plugin> -->
 
 			<!-- MySQL初始化插件 -->
 			<plugin>
@@ -384,9 +404,7 @@
 
 				</configuration>
 				<executions>
-
-
-					<!-- 测试前删除已有数据库 -->
+					<!-- 测试前删除已有数据库 
 					<execution>
 						<id>drop-db-before-test-if-any</id>
 						<phase>process-test-resources</phase>
@@ -398,7 +416,7 @@
 							<sqlCommand>drop database campusAssistant_web</sqlCommand>
 							<onError>continue</onError>
 						</configuration>
-					</execution>
+					</execution>-->
 
 					<!-- 初始化数据库 -->
 					<execution>
@@ -441,58 +459,23 @@
 			</activation>
 			<build>
 				<plugins>
-					<!-- axis2 wsdl2code插件 -->
-					<plugin>
-						<groupId>org.apache.axis2</groupId>
-						<artifactId>axis2-wsdl2code-maven-plugin</artifactId>
-						<version>1.6.2</version>
-						<executions>
-							<execution>
-								<phase>generate-sources</phase>
-								<goals>
-									<goal>wsdl2code</goal>
-								</goals>
-								<configuration>
-									<packageName>com.techthinker.test</packageName>
-									<wsdlFile>Version.wsdl</wsdlFile>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
+					<!-- axis2 wsdl2code插件 <plugin> <groupId>org.apache.axis2</groupId> 
+						<artifactId>axis2-wsdl2code-maven-plugin</artifactId> <version>1.6.2</version> 
+						<executions> <execution> <phase>generate-sources</phase> <goals> <goal>wsdl2code</goal> 
+						</goals> <configuration> <packageName>com.techthinker.test</packageName> 
+						<wsdlFile>Version.wsdl</wsdlFile> </configuration> </execution> </executions> 
+						</plugin> -->
 
-					<!-- axis2 java2wsdl插件 -->
-					<plugin>
-						<groupId>org.apache.axis2</groupId>
-						<artifactId>axis2-java2wsdl-maven-plugin</artifactId>
-						<configuration>
-							<className>com.foo.myservice.MyHandler</className>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>java2wsdl</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
+					<!-- axis2 java2wsdl插件 <plugin> <groupId>org.apache.axis2</groupId> 
+						<artifactId>axis2-java2wsdl-maven-plugin</artifactId> <configuration> <className>com.foo.myservice.MyHandler</className> 
+						</configuration> <executions> <execution> <goals> <goal>java2wsdl</goal> 
+						</goals> </execution> </executions> </plugin> -->
 
-					<!-- jetty服务器部署插件 -->
-					<plugin>
-						<groupId>org.mortbay.jetty</groupId>
-						<artifactId>jetty-maven-plugin</artifactId>
-						<configuration>
-							<scanIntervalSeconds>10</scanIntervalSeconds>
-							<webApp>
-								<contextPath>/kk</contextPath>
-							</webApp>
-							<connectors>
-								<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-									<port>8787</port>
-									<maxIdleTime>60000</maxIdleTime>
-								</connector>
-							</connectors>
-						</configuration>
-					</plugin>
+					<!-- jetty服务器部署插件 <plugin> <groupId>org.mortbay.jetty</groupId> <artifactId>jetty-maven-plugin</artifactId> 
+						<configuration> <scanIntervalSeconds>10</scanIntervalSeconds> <webApp> <contextPath>/kk</contextPath> 
+						</webApp> <connectors> <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector"> 
+						<port>8787</port> <maxIdleTime>60000</maxIdleTime> </connector> </connectors> 
+						</configuration> </plugin> -->
 
 					<!-- 源文件打包插件 -->
 					<plugin>
@@ -509,20 +492,9 @@
 						</executions>
 					</plugin>
 
-					<!-- rar打包插件 -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-rar-plugin</artifactId>
-						<version>2.2</version>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>rar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
+					<!-- rar打包插件 <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-rar-plugin</artifactId> 
+						<version>2.2</version> <executions> <execution> <phase>package</phase> <goals> 
+						<goal>rar</goal> </goals> </execution> </executions> </plugin> -->
 				</plugins>
 			</build>
 		</profile>

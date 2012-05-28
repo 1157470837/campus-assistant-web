@@ -1,6 +1,7 @@
 package com.techthinker.CAWeb.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.stereotype.Service;
 
+import com.techthinker.CAWeb.analyzer.EtartAnalyzer;
 import com.techthinker.CAWeb.idao.ICampusnewsDao;
 import com.techthinker.CAWeb.idao.ICollegeDao;
 import com.techthinker.CAWeb.idao.IGradeDao;
@@ -17,8 +19,8 @@ import com.techthinker.CAWeb.idao.IQuestionDao;
 import com.techthinker.CAWeb.idao.IScenicspotDao;
 import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.idao.IUserDao;
-import com.techthinker.CAWeb.index.SolrContext;
 import com.techthinker.CAWeb.iservice.IIndexService;
+import com.techthinker.CAWeb.solr.SolrContext;
 import com.techthinker.CAWeb.util.IndexUtil;
 import com.techthinker.CAWeb.vo.Campusnews;
 import com.techthinker.CAWeb.vo.College;
@@ -42,6 +44,23 @@ public class IndexService implements IIndexService {
 	private IQuestionDao questionDao;
 	private IScenicspotDao scenicspotDao;
 	private IIntentDao intentDao;
+	private EtartAnalyzer etart;
+
+	/**
+	 * @return the etart
+	 */
+	public EtartAnalyzer getEtart() {
+		return etart;
+	}
+
+	/**
+	 * @param etart
+	 *            the etart to set
+	 */
+	@Resource
+	public void setEtart(EtartAnalyzer etart) {
+		this.etart = etart;
+	}
 
 	/**
 	 * @return the userDao
@@ -212,10 +231,22 @@ public class IndexService implements IIndexService {
 	}
 
 	@Override
-	public void updateIndex(IndexField fields) {
+	public void updateIndex(IndexField field) {
 		try {
-			SolrContext.getServer().deleteById(fields.getId());
-			SolrContext.getServer().addBean(fields);
+			SolrContext.getServer().deleteById(field.getId());
+			SolrContext.getServer().addBean(field);
+			SolrContext.getServer().commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SolrServerException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void addIndex(List<IndexField> fields) {
+		try {
+			SolrContext.getServer().addBeans(fields);
 			SolrContext.getServer().commit();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -228,33 +259,60 @@ public class IndexService implements IIndexService {
 	public void updateSetIndex() {
 		try {
 			List<TempIndex> tis = tempIndexDao.list("from TempIndex");
+			if(tis.size()<=0) return;
+			List<IndexField> indexFields = new ArrayList<IndexField>();
+			List<IndexField> userIndexFields = new ArrayList<IndexField>();
+			List<IndexField> campusnewsIndexFields = new ArrayList<IndexField>();
+			List<IndexField> collegeIndexFields = new ArrayList<IndexField>();
+			List<IndexField> gradeIndexFields = new ArrayList<IndexField>();
+			List<IndexField> intentIndexFields = new ArrayList<IndexField>();
+			List<IndexField> majorIndexFields = new ArrayList<IndexField>();
+			List<IndexField> questionIndexFields = new ArrayList<IndexField>();
+			List<IndexField> senicspotIndexFields = new ArrayList<IndexField>();
+			List<User> users = new ArrayList<User>();
 			for (TempIndex ti : tis) {
 				if (ti.getObjType().equals(IndexUtil.ACTION_USER)) {
 					User user = userDao.load(ti.getObjId());
-					indexUser(user, ti.getOperator());
+					users.add(user);
+					userIndexFields.add(indexUser(user, ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_CAMPUSNEWS)) {
 					Campusnews campusnews = campusnewsDao.load(ti.getObjId());
-					indexCampusnews(campusnews, ti.getOperator());
+					campusnewsIndexFields.add(indexCampusnews(campusnews,
+							ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_COLLEGE)) {
 					College college = collegeDao.load(ti.getObjId());
-					indexCollege(college, ti.getOperator());
+					collegeIndexFields.add(indexCollege(college,
+							ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_GRADE)) {
 					Grade grade = gradeDao.load(ti.getObjId());
-					indexGrade(grade, ti.getOperator());
+					gradeIndexFields.add(indexGrade(grade, ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_INTENT)) {
 					Intent intent = intentDao.load(ti.getObjId());
-					indexIntent(intent, ti.getOperator());
+					intentIndexFields
+							.add(indexIntent(intent, ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_MAJOR)) {
 					Major major = majorDao.load(ti.getObjId());
-					indexMajor(major, ti.getOperator());
+					majorIndexFields.add(indexMajor(major, ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_QUESTION)) {
 					Question question = questionDao.load(ti.getObjId());
-					indexQuestion(question, ti.getOperator());
+					questionIndexFields.add(indexQuestion(question,
+							ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_SCENICSPOT)) {
 					Scenicspot scenicspot = scenicspotDao.load(ti.getObjId());
-					indexScenicspot(scenicspot, ti.getOperator());
+					senicspotIndexFields.add(indexScenicspot(scenicspot,
+							ti.getOperator()));
 				}
 			}
+			etart.updateUserDic(users);
+			indexFields.addAll(userIndexFields);
+			indexFields.addAll(collegeIndexFields);
+			indexFields.addAll(majorIndexFields);
+			indexFields.addAll(gradeIndexFields);
+			indexFields.addAll(questionIndexFields);
+			indexFields.addAll(senicspotIndexFields);
+			indexFields.addAll(campusnewsIndexFields);
+			indexFields.addAll(indexFields);
+			addIndex(indexFields);
 			SolrContext.getServer().commit();
 			tempIndexDao.delAll();
 		} catch (SolrServerException e) {
@@ -262,12 +320,6 @@ public class IndexService implements IIndexService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void updateCommitIndex() {
-		updateSetIndex();
-		tempIndexDao.delAll();
 	}
 
 	@Override
@@ -277,245 +329,271 @@ public class IndexService implements IIndexService {
 		 */
 		try {
 			SolrContext.getServer().deleteByQuery("*:*");
+			List<IndexField> indexFields;
 			List<User> users = userDao.list("from User");
-			indexUsers(users, IndexUtil.OP_ADD);
+			indexFields = indexUsers(users, IndexUtil.OP_ADD);
 			List<College> colleges = collegeDao.list("from College");
-			indexCollege(colleges, IndexUtil.OP_ADD);
+			indexFields.addAll(indexCollege(colleges, IndexUtil.OP_ADD));
 			List<Major> majors = majorDao.list("from Major");
-			indexMajors(majors, IndexUtil.OP_ADD);
+			indexFields.addAll(indexMajors(majors, IndexUtil.OP_ADD));
 			List<Grade> grades = gradeDao.list("from Grade");
-			indexGrades(grades, IndexUtil.OP_ADD);
+			indexFields.addAll(indexGrades(grades, IndexUtil.OP_ADD));
 			List<Campusnews> campusnewses = campusnewsDao
 					.list("from Campusnews");
-			indexCampusnewses(campusnewses, IndexUtil.OP_ADD);
+			indexFields
+					.addAll(indexCampusnewses(campusnewses, IndexUtil.OP_ADD));
 			List<Question> questions = questionDao.list("from Question");
-			indexQuestions(questions, IndexUtil.OP_ADD);
+			indexFields.addAll(indexQuestions(questions, IndexUtil.OP_ADD));
 			List<Intent> intents = intentDao.list("from Intent");
-			indexIntents(intents, IndexUtil.OP_ADD);
+			indexFields.addAll(indexIntents(intents, IndexUtil.OP_ADD));
 			List<Scenicspot> scenicspots = scenicspotDao
 					.list("from Scenicspot");
-			indexScenicspots(scenicspots, IndexUtil.OP_ADD);
+			indexFields.addAll(indexScenicspots(scenicspots, IndexUtil.OP_ADD));
+			addIndex(indexFields);
 			SolrContext.getServer().commit();
 			tempIndexDao.delAll();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (SolrServerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private void indexUsers(List<User> users, int operator) {
+	private List<IndexField> indexUsers(List<User> users, int operator) {
+		List<IndexField> indexFields = new ArrayList<IndexField>();
 		for (User user : users) {
-			indexUser(user, operator);
+			indexFields.add(indexUser(user, operator));
 		}
+		return indexFields;
 	}
 
-	private void indexCollege(List<College> colleges, int operator) {
+	private List<IndexField> indexCollege(List<College> colleges, int operator) {
+		List<IndexField> indexFields = new ArrayList<IndexField>();
 		for (College college : colleges) {
-			indexCollege(college, operator);
+			indexFields.add(indexCollege(college, operator));
 		}
+		return indexFields;
 	}
 
-	private void indexMajors(List<Major> majors, int operator) {
+	private List<IndexField> indexMajors(List<Major> majors, int operator) {
+		List<IndexField> indexFields = new ArrayList<IndexField>();
 		for (Major major : majors) {
-			indexMajor(major, operator);
+			indexFields.add(indexMajor(major, operator));
 		}
+		return indexFields;
 	}
 
-	private void indexGrades(List<Grade> grades, int operator) {
+	private List<IndexField> indexGrades(List<Grade> grades, int operator) {
+		List<IndexField> indexFields = new ArrayList<IndexField>();
 		for (Grade grade : grades) {
-			indexGrade(grade, operator);
+			indexFields.add(indexGrade(grade, operator));
 		}
+		return indexFields;
 	}
 
-	private void indexCampusnewses(List<Campusnews> campusnewses, int operator) {
+	private List<IndexField> indexCampusnewses(List<Campusnews> campusnewses,
+			int operator) {
+		List<IndexField> indexFields = new ArrayList<IndexField>();
 		for (Campusnews campusnewse : campusnewses) {
-			indexCampusnews(campusnewse, operator);
+			indexFields.add(indexCampusnews(campusnewse, operator));
 		}
+		return indexFields;
 	}
 
-	private void indexQuestions(List<Question> questions, int operator) {
+	private List<IndexField> indexQuestions(List<Question> questions,
+			int operator) {
+		List<IndexField> indexFields = new ArrayList<IndexField>();
 		for (Question question : questions) {
-			indexQuestion(question, operator);
+			indexFields.add(indexQuestion(question, operator));
 		}
+		return indexFields;
 	}
 
-	private void indexIntents(List<Intent> intents, int operator) {
+	private List<IndexField> indexIntents(List<Intent> intents, int operator) {
+		List<IndexField> indexFields = new ArrayList<IndexField>();
 		for (Intent intent : intents) {
-			indexIntent(intent, operator);
+			indexFields.add(indexIntent(intent, operator));
 		}
+		return indexFields;
 	}
 
-	private void indexScenicspots(List<Scenicspot> scenicspots, int operator) {
+	private List<IndexField> indexScenicspots(List<Scenicspot> scenicspots,
+			int operator) {
+		List<IndexField> indexFields = new ArrayList<IndexField>();
 		for (Scenicspot scenicspot : scenicspots) {
-			indexScenicspot(scenicspot, operator);
+			indexFields.add(indexScenicspot(scenicspot, operator));
 		}
+		return indexFields;
 	}
 
-	private void indexQuestion(Question question, int operator) {
+	private IndexField indexQuestion(Question question, int operator) {
+		IndexField indexField = null;
 		switch (operator) {
 		case IndexUtil.OP_ADD:
-			IndexField field1 = IndexUtil.createIndexField(
-					question.getQuestionId(), question.getContent(),
-					question.getAnswer(), IndexUtil.ACTION_QUESTION);
-			addIndex(field1);
+			indexField = IndexUtil.createIndexField(question.getQuestionId(),
+					question.getContent(), question.getAnswer(),
+					IndexUtil.ACTION_QUESTION);
 			break;
 		case IndexUtil.OP_DEL:
 			deleteIndex(IndexUtil.ACTION_QUESTION + "_"
 					+ question.getQuestionId());
 			break;
 		case IndexUtil.OP_UPDATE:
-			IndexField field2 = IndexUtil.createIndexField(
-					question.getQuestionId(), question.getContent(),
-					question.getAnswer(), IndexUtil.ACTION_QUESTION);
-			updateIndex(field2);
+			indexField = IndexUtil.createIndexField(question.getQuestionId(),
+					question.getContent(), question.getAnswer(),
+					IndexUtil.ACTION_QUESTION);
 			break;
 		}
+		return indexField;
 	}
 
-	private void indexMajor(Major major, int operator) {
+	private IndexField indexMajor(Major major, int operator) {
+		IndexField indexField = null;
 		switch (operator) {
 		case IndexUtil.OP_ADD:
-			IndexField field1 = IndexUtil.createIndexField(major.getMajorId(),
+			indexField = IndexUtil.createIndexField(major.getMajorId(),
 					major.getMajorName(), major.getDescription(),
 					IndexUtil.ACTION_MAJOR);
-			addIndex(field1);
+
 			break;
 		case IndexUtil.OP_DEL:
 			deleteIndex(IndexUtil.ACTION_MAJOR + "_" + major.getMajorId());
 			break;
 		case IndexUtil.OP_UPDATE:
-			IndexField field2 = IndexUtil.createIndexField(major.getMajorId(),
+			indexField = IndexUtil.createIndexField(major.getMajorId(),
 					major.getMajorName(), major.getDescription(),
 					IndexUtil.ACTION_MAJOR);
-			updateIndex(field2);
+
 			break;
 		}
+		return indexField;
 	}
 
-	private void indexIntent(Intent intent, int operator) {
+	private IndexField indexIntent(Intent intent, int operator) {
+		IndexField indexField = null;
 		switch (operator) {
 		case IndexUtil.OP_ADD:
-			IndexField field1 = IndexUtil.createIndexField(
-					intent.getIntent_id(), intent.getBrief(),
-					intent.getExtension(), IndexUtil.ACTION_INTENT);
-			addIndex(field1);
+			indexField = IndexUtil.createIndexField(intent.getIntent_id(),
+					intent.getBrief(), intent.getExtension(),
+					IndexUtil.ACTION_INTENT);
+
 			break;
 		case IndexUtil.OP_DEL:
 			deleteIndex(IndexUtil.ACTION_INTENT + "_" + intent.getIntent_id());
 			break;
 		case IndexUtil.OP_UPDATE:
-			IndexField field2 = IndexUtil.createIndexField(
-					intent.getIntent_id(), intent.getBrief(),
-					intent.getExtension(), IndexUtil.ACTION_INTENT);
-			updateIndex(field2);
+			indexField = IndexUtil.createIndexField(intent.getIntent_id(),
+					intent.getBrief(), intent.getExtension(),
+					IndexUtil.ACTION_INTENT);
+
 			break;
 		}
+		return indexField;
 	}
 
-	private void indexGrade(Grade grade, int operator) {
+	private IndexField indexGrade(Grade grade, int operator) {
+		IndexField indexField = null;
 		switch (operator) {
 		case IndexUtil.OP_ADD:
-			IndexField field1 = IndexUtil.createIndexField(grade.getGradeId(),
+			indexField = IndexUtil.createIndexField(grade.getGradeId(),
 					grade.getGradeName(), grade.getDescription(),
 					IndexUtil.ACTION_GRADE);
-			addIndex(field1);
+
 			break;
 		case IndexUtil.OP_DEL:
 			deleteIndex(IndexUtil.ACTION_GRADE + "_" + grade.getGradeId());
 			break;
 		case IndexUtil.OP_UPDATE:
-			IndexField field2 = IndexUtil.createIndexField(grade.getGradeId(),
+			indexField = IndexUtil.createIndexField(grade.getGradeId(),
 					grade.getGradeName(), grade.getDescription(),
 					IndexUtil.ACTION_GRADE);
-			updateIndex(field2);
 			break;
 		}
+		return indexField;
 	}
 
-	private void indexCollege(College college, int operator) {
+	private IndexField indexCollege(College college, int operator) {
+		IndexField indexField = null;
 		switch (operator) {
 		case IndexUtil.OP_ADD:
-			IndexField field1 = IndexUtil.createIndexField(
-					college.getCollegeId(), college.getCollegeName(),
-					college.getDescription(), IndexUtil.ACTION_COLLEGE);
-			addIndex(field1);
+			indexField = IndexUtil.createIndexField(college.getCollegeId(),
+					college.getCollegeName(), college.getDescription(),
+					IndexUtil.ACTION_COLLEGE);
 			break;
 		case IndexUtil.OP_DEL:
 			deleteIndex(IndexUtil.ACTION_COLLEGE + "_" + college.getCollegeId());
 			break;
 		case IndexUtil.OP_UPDATE:
-			IndexField field2 = IndexUtil.createIndexField(
-					college.getCollegeId(), college.getCollegeName(),
-					college.getDescription(), IndexUtil.ACTION_COLLEGE);
-			updateIndex(field2);
+			indexField = IndexUtil.createIndexField(college.getCollegeId(),
+					college.getCollegeName(), college.getDescription(),
+					IndexUtil.ACTION_COLLEGE);
 			break;
 		}
+		return indexField;
 	}
 
-	private void indexCampusnews(Campusnews campusnews, int operator) {
+	private IndexField indexCampusnews(Campusnews campusnews, int operator) {
+		IndexField indexField = null;
 		switch (operator) {
 		case IndexUtil.OP_ADD:
-			IndexField field1 = IndexUtil.createIndexField(
+			indexField = IndexUtil.createIndexField(
 					campusnews.getCampusnewId(),
 					(campusnews.getNewstype() == 1) ? "新闻" : "通知",
 					campusnews.getContent(), IndexUtil.ACTION_CAMPUSNEWS);
-			addIndex(field1);
 			break;
 		case IndexUtil.OP_DEL:
 			deleteIndex(IndexUtil.ACTION_CAMPUSNEWS + "_"
 					+ campusnews.getCampusnewId());
 			break;
 		case IndexUtil.OP_UPDATE:
-			IndexField field2 = IndexUtil.createIndexField(
+			indexField = IndexUtil.createIndexField(
 					campusnews.getCampusnewId(),
 					(campusnews.getNewstype() == 1) ? "新闻" : "通知",
 					campusnews.getContent(), IndexUtil.ACTION_CAMPUSNEWS);
-			updateIndex(field2);
 			break;
 		}
+		return indexField;
 	}
 
-	private void indexUser(User user, int operator) {
+	private IndexField indexUser(User user, int operator) {
+		IndexField indexField = null;
 		switch (operator) {
 		case IndexUtil.OP_ADD:
-			IndexField field1 = IndexUtil.createIndexField(user.getUserId(),
+			indexField = IndexUtil.createIndexField(user.getUserId(),
 					user.getUsername(), user.getDescription(),
 					IndexUtil.ACTION_USER);
-			addIndex(field1);
 			break;
 		case IndexUtil.OP_DEL:
 			deleteIndex(IndexUtil.ACTION_USER + "_" + user.getUserId());
 			break;
 		case IndexUtil.OP_UPDATE:
-			IndexField field2 = IndexUtil.createIndexField(user.getUserId(),
+			indexField = IndexUtil.createIndexField(user.getUserId(),
 					user.getUsername(), user.getDescription(),
 					IndexUtil.ACTION_USER);
-			updateIndex(field2);
 			break;
 		}
+		return indexField;
 	}
 
-	private void indexScenicspot(Scenicspot scenicspot, int operator) {
+	private IndexField indexScenicspot(Scenicspot scenicspot, int operator) {
+		IndexField indexField = null;
 		switch (operator) {
 		case IndexUtil.OP_ADD:
-			IndexField field1 = IndexUtil.createIndexField(
+			indexField = IndexUtil.createIndexField(
 					scenicspot.getScenicspotId(), scenicspot.getSpotname(),
 					scenicspot.getDescription(), IndexUtil.ACTION_SCENICSPOT);
-			addIndex(field1);
 			break;
 		case IndexUtil.OP_DEL:
 			deleteIndex(IndexUtil.ACTION_SCENICSPOT + "_"
 					+ scenicspot.getScenicspotId());
 			break;
 		case IndexUtil.OP_UPDATE:
-			IndexField field2 = IndexUtil.createIndexField(
+			indexField = IndexUtil.createIndexField(
 					scenicspot.getScenicspotId(), scenicspot.getSpotname(),
 					scenicspot.getDescription(), IndexUtil.ACTION_SCENICSPOT);
-			updateIndex(field2);
 			break;
 		}
+		return indexField;
 	}
 
 	// @Override

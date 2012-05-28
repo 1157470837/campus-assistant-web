@@ -13,16 +13,36 @@ import org.springframework.stereotype.Service;
 import com.techthinker.CAWeb.exception.GradeException;
 import com.techthinker.CAWeb.idao.IGradeDao;
 import com.techthinker.CAWeb.idao.IMajorDao;
+import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.iservice.IGradeService;
+import com.techthinker.CAWeb.util.IndexUtil;
 import com.techthinker.CAWeb.util.PageObject;
 import com.techthinker.CAWeb.vo.Grade;
 import com.techthinker.CAWeb.vo.Major;
+import com.techthinker.CAWeb.vo.TempIndex;
 
 @Service("gradeService")
 public class GradeService implements IGradeService {
 
 	private IGradeDao gradeDao;
 	private IMajorDao majorDao;
+	private ITempIndexDao tempIndexDao;
+
+	/**
+	 * @return the tempIndexDao
+	 */
+	public ITempIndexDao getTempIndexDao() {
+		return tempIndexDao;
+	}
+
+	/**
+	 * @param tempIndexDao
+	 *            the tempIndexDao to set
+	 */
+	@Resource
+	public void setTempIndexDao(ITempIndexDao tempIndexDao) {
+		this.tempIndexDao = tempIndexDao;
+	}
 
 	public IMajorDao getMajorDao() {
 		return majorDao;
@@ -120,6 +140,11 @@ public class GradeService implements IGradeService {
 				g.setGradeName(r.trim());
 				g.setDescription(br.readLine().trim());
 				gradeDao.add(g);
+				TempIndex tempIndex = new TempIndex();
+				tempIndex.setAdd();
+				tempIndex.setObjId(g.getGradeId());
+				tempIndex.setObjType(IndexUtil.ACTION_GRADE);
+				tempIndexDao.add(tempIndex);
 			}
 			r = br.readLine();
 		}

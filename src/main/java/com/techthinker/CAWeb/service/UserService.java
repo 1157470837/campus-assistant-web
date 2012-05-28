@@ -14,12 +14,15 @@ import org.springframework.stereotype.Service;
 import com.techthinker.CAWeb.exception.UserException;
 import com.techthinker.CAWeb.idao.IMajorDao;
 import com.techthinker.CAWeb.idao.IScenicspotDao;
+import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.idao.IUserDao;
 import com.techthinker.CAWeb.idao.IUsertypeDao;
 import com.techthinker.CAWeb.iservice.IUserService;
+import com.techthinker.CAWeb.util.IndexUtil;
 import com.techthinker.CAWeb.util.PageObject;
 import com.techthinker.CAWeb.vo.Major;
 import com.techthinker.CAWeb.vo.Scenicspot;
+import com.techthinker.CAWeb.vo.TempIndex;
 import com.techthinker.CAWeb.vo.User;
 import com.techthinker.CAWeb.vo.Usertype;
 
@@ -30,6 +33,21 @@ public class UserService implements IUserService {
 	private IMajorDao majorDao;
 	private IScenicspotDao scenicspotDao;
 	private IUsertypeDao usertypeDao;
+	private ITempIndexDao tempIndexDao;
+	/**
+	 * @return the tempIndexDao
+	 */
+	public ITempIndexDao getTempIndexDao() {
+		return tempIndexDao;
+	}
+
+	/**
+	 * @param tempIndexDao the tempIndexDao to set
+	 */
+	@Resource
+	public void setTempIndexDao(ITempIndexDao tempIndexDao) {
+		this.tempIndexDao = tempIndexDao;
+	}
 
 	public IUsertypeDao getUsertypeDao() {
 		return usertypeDao;
@@ -165,6 +183,11 @@ public class UserService implements IUserService {
 				tempUser.setGeoinfo(tempS.getGeoinfo());
 				
 				userDao.add(tempUser);
+				TempIndex tempIndex = new TempIndex();
+				tempIndex.setAdd();
+				tempIndex.setObjId(tempUser.getUserId());
+				tempIndex.setObjType(IndexUtil.ACTION_USER);
+				tempIndexDao.add(tempIndex);
 				
 			}
 			

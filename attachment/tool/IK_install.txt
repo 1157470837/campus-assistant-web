@@ -1,0 +1,1 @@
+install:install-file -DgroupId=com.techthinker.CAWeb -DartifactId=IKAnalyzer2012 -Dversion=2012_u5 -Dpackaging=jar -Dfile=F:\finalDesgin\IKAnalyzer2012_u5\IKAnalyzer2012.jar
