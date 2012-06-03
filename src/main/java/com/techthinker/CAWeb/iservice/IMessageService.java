@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import com.techthinker.CAWeb.persistence.Message;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.Message;
 
 public interface IMessageService {
 	/**

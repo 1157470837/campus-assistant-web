@@ -15,11 +15,11 @@ import com.techthinker.CAWeb.idao.ICollegeDao;
 import com.techthinker.CAWeb.idao.IScenicspotDao;
 import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.iservice.ICollegeService;
+import com.techthinker.CAWeb.persistence.College;
+import com.techthinker.CAWeb.persistence.Scenicspot;
+import com.techthinker.CAWeb.persistence.TempIndex;
 import com.techthinker.CAWeb.util.IndexUtil;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.College;
-import com.techthinker.CAWeb.vo.Scenicspot;
-import com.techthinker.CAWeb.vo.TempIndex;
 
 @Service("collegeService")
 public class CollegeService implements ICollegeService {

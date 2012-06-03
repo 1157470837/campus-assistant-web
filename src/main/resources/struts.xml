@@ -5,7 +5,7 @@
 <struts>
 	<!-- 设置扩展名 -->
 	<constant name="struts.action.extension" value="action,do" />
-	
+	<constant name="struts.devMode" value="false"/>
 	<!-- 设置修改了配置文件不用重新启动 -->
 	<constant name="struts.configuration.xml.reload" value="true" />
 	<constant name="struts.ui.theme" value="simple" />
@@ -20,12 +20,15 @@
 		<global-exception-mappings>
 			<exception-mapping result="findException"
 				exception="com.techthinker.CAWeb.exception.MessageException" />
+				
 		</global-exception-mappings>-->
 		<action name="*_*" class="{1}Action" method="{2}">
 			<result name="success">/WEB-INF/jsp/{1}/{2}.jsp</result>
-			<!--<result name="input">/WEB-INF/jsp/{1}/{2}Input.jsp</result>
-			 <result name="redirect" type="redirect">/${#urlAction}</result> -->
+			<result name="loginOk">/WEB-INF/jsp/user/loginSuccess.jsp</result>
+			<result name="loginFailure">/login.jsp</result>
+			<result name="input">/WEB-INF/jsp/user/register.jsp</result>
+ 			<result name="register" type="redirectAction">user_register</result>
+<!-- 		 	<result name="redirect" type="redirect">${#urlAction}</result>-->
 		</action>
 	</package>
 </struts>
-

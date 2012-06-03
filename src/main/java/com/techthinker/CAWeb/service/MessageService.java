@@ -15,10 +15,10 @@ import com.techthinker.CAWeb.idao.IChatroomDao;
 import com.techthinker.CAWeb.idao.IMessageDao;
 import com.techthinker.CAWeb.idao.IUserDao;
 import com.techthinker.CAWeb.iservice.IMessageService;
+import com.techthinker.CAWeb.persistence.Chatroom;
+import com.techthinker.CAWeb.persistence.Message;
+import com.techthinker.CAWeb.persistence.User;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.Chatroom;
-import com.techthinker.CAWeb.vo.Message;
-import com.techthinker.CAWeb.vo.User;
 
 @Service("messageService")
 public class MessageService implements IMessageService {

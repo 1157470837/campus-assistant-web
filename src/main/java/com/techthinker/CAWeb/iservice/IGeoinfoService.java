@@ -3,7 +3,7 @@ package com.techthinker.CAWeb.iservice;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.techthinker.CAWeb.vo.Geoinfo;
+import com.techthinker.CAWeb.persistence.Geoinfo;
 
 public interface IGeoinfoService {
 	

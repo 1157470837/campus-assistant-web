@@ -18,13 +18,13 @@ import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.idao.IUserDao;
 import com.techthinker.CAWeb.idao.IUsertypeDao;
 import com.techthinker.CAWeb.iservice.IUserService;
+import com.techthinker.CAWeb.persistence.Major;
+import com.techthinker.CAWeb.persistence.Scenicspot;
+import com.techthinker.CAWeb.persistence.TempIndex;
+import com.techthinker.CAWeb.persistence.User;
+import com.techthinker.CAWeb.persistence.Usertype;
 import com.techthinker.CAWeb.util.IndexUtil;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.Major;
-import com.techthinker.CAWeb.vo.Scenicspot;
-import com.techthinker.CAWeb.vo.TempIndex;
-import com.techthinker.CAWeb.vo.User;
-import com.techthinker.CAWeb.vo.Usertype;
 
 @Service("userService")
 public class UserService implements IUserService {

@@ -145,6 +145,7 @@ CREATE  TABLE IF NOT EXISTS `campusAssistant_web`.`relation` (
   `relation_id` INT NOT NULL AUTO_INCREMENT ,
   `user_id1` INT NOT NULL ,
   `user_id2` INT NOT NULL ,
+  `status` INT NOT NULL ,
   PRIMARY KEY (`relation_id`) ,
   INDEX `relation_user_id1` (`user_id1` ASC) ,
   INDEX `relation_user_id2` (`user_id2` ASC) ,

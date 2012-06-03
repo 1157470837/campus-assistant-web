@@ -39,7 +39,7 @@
 		
 		<!--自动去com.techthinker.CAWeb.vo包中找hbm或者配置了annotation的class文件 -->
 		<property name="packagesToScan">
-			<value>com.techthinker.CAWeb.vo</value>
+			<value>com.techthinker.CAWeb.persistence</value>
 		</property>
 		
 		<property name="hibernateProperties">

@@ -15,11 +15,11 @@ import com.techthinker.CAWeb.idao.IGradeDao;
 import com.techthinker.CAWeb.idao.IMajorDao;
 import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.iservice.IGradeService;
+import com.techthinker.CAWeb.persistence.Grade;
+import com.techthinker.CAWeb.persistence.Major;
+import com.techthinker.CAWeb.persistence.TempIndex;
 import com.techthinker.CAWeb.util.IndexUtil;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.Grade;
-import com.techthinker.CAWeb.vo.Major;
-import com.techthinker.CAWeb.vo.TempIndex;
 
 @Service("gradeService")
 public class GradeService implements IGradeService {

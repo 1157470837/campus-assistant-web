@@ -15,11 +15,11 @@ import com.techthinker.CAWeb.idao.ICollegeDao;
 import com.techthinker.CAWeb.idao.IMajorDao;
 import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.iservice.IMajorService;
+import com.techthinker.CAWeb.persistence.College;
+import com.techthinker.CAWeb.persistence.Major;
+import com.techthinker.CAWeb.persistence.TempIndex;
 import com.techthinker.CAWeb.util.IndexUtil;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.College;
-import com.techthinker.CAWeb.vo.Major;
-import com.techthinker.CAWeb.vo.TempIndex;
 
 @Service("majorService")
 public class MajorService implements IMajorService {
@@ -91,19 +91,25 @@ public class MajorService implements IMajorService {
 		return this.majorDao.list("from Major");
 	}
 
+	
+	@Override
+	public List<Major> listMajorsByCollegeId(int id) {
+		return majorDao.list("from Major m where m.college.collegeId = ?", id);
+	}
+
 	@Override
 	public PageObject<Major> find(String majorName) {
 		if (majorName == null || "".equals(majorName.trim())) {
 			return majorDao.find("from Major");
 		} else {
-			return majorDao.find("from Major where majorName like ?",
+			return majorDao.find("from Major m where m.majorName like ?",
 					new Object[] { "%" + majorName + "%" });
 		}
 	}
 
 	@Override
 	public Major loadByMajorname(String majorName) {
-		return majorDao.loadByHql("from Major where majorName=?", majorName);
+		return majorDao.loadByHql("from Major m where m.majorName=?", majorName);
 	}
 
 	@Override

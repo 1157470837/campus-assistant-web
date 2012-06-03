@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -15,12 +18,15 @@ import com.techthinker.CAWeb.idao.IChatroomDao;
 import com.techthinker.CAWeb.idao.ICollegeDao;
 import com.techthinker.CAWeb.idao.IGradeDao;
 import com.techthinker.CAWeb.idao.IMajorDao;
+import com.techthinker.CAWeb.idao.IMessageDao;
 import com.techthinker.CAWeb.iservice.IChatroomService;
+import com.techthinker.CAWeb.persistence.Chatroom;
+import com.techthinker.CAWeb.persistence.College;
+import com.techthinker.CAWeb.persistence.Grade;
+import com.techthinker.CAWeb.persistence.Major;
+import com.techthinker.CAWeb.persistence.Message;
+import com.techthinker.CAWeb.persistence.User;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.Chatroom;
-import com.techthinker.CAWeb.vo.College;
-import com.techthinker.CAWeb.vo.Grade;
-import com.techthinker.CAWeb.vo.Major;
 
 @Service("chatroomService")
 public class ChatroomService implements IChatroomService {
@@ -29,7 +35,23 @@ public class ChatroomService implements IChatroomService {
 	private IGradeDao gradeDao;
 	private IMajorDao majorDao;
 	private ICollegeDao colllegeDao;
+	private IMessageDao messageDao;
 
+    public IMessageDao getMessageDao() {
+		return messageDao;
+	}
+
+    @Resource
+	public void setMessageDao(IMessageDao messageDao) {
+		this.messageDao = messageDao;
+	}
+
+	private Map<String, User> availableUsers = new LinkedHashMap<String, User>();
+	
+	public List<User> getAvailableUsers() {
+		return new ArrayList<User>(availableUsers.values());
+	}
+	
 	public ICollegeDao getColllegeDao() {
 		return colllegeDao;
 	}
@@ -130,6 +152,40 @@ public class ChatroomService implements IChatroomService {
 				"select count(*) from Chatroom where chatroomName=?",
 				chatroomName);
 		return count > 0 ? true : false;
+	}
+	
+	@Override
+	public void enterRoom(User user, int roomID) {
+
+	}
+
+	@Override
+	public void exitRoom(int userID, int roomID) {
+
+	}
+
+	@Override
+	public void sendMessageToRoom(int type, int identity, User user,
+			String message) {
+        if( 1==type){//向聊天室发送消息
+        	Chatroom room = chatroomDao.load(identity);
+        	//Message msg = new Message(user,room,message,new Timestamp(System.currentTimeMillis()),(Integer)type);
+        }else if ( 2== type ){//向用户发送消息
+        	
+        }
+		
+	}
+
+	@Override
+	public List<User> getUsersAvailableInRoom(int roomId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Message> getMessagesInRoom(int roomId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

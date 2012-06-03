@@ -4,7 +4,7 @@ package com.techthinker.CAWeb.dao;
 import org.springframework.stereotype.Repository;
 
 import com.techthinker.CAWeb.idao.ITempIndexDao;
-import com.techthinker.CAWeb.vo.TempIndex;
+import com.techthinker.CAWeb.persistence.TempIndex;
 
 @Repository("tempIndexDao")
 public class TempIndexDao extends BaseDao<TempIndex> implements ITempIndexDao {

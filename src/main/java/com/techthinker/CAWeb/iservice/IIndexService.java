@@ -2,7 +2,7 @@ package com.techthinker.CAWeb.iservice;
 
 import java.util.List;
 
-import com.techthinker.CAWeb.vo.IndexField;
+import com.techthinker.CAWeb.persistence.IndexField;
 
 public interface IIndexService {
 	/**

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Blob;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -15,11 +16,11 @@ import com.techthinker.CAWeb.idao.IScenicspotDao;
 import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.iservice.IGeoinfoService;
 import com.techthinker.CAWeb.iservice.IScenicspotService;
+import com.techthinker.CAWeb.persistence.Geoinfo;
+import com.techthinker.CAWeb.persistence.Scenicspot;
+import com.techthinker.CAWeb.persistence.TempIndex;
 import com.techthinker.CAWeb.util.IndexUtil;
 import com.techthinker.CAWeb.util.SystemConstant;
-import com.techthinker.CAWeb.vo.Geoinfo;
-import com.techthinker.CAWeb.vo.Scenicspot;
-import com.techthinker.CAWeb.vo.TempIndex;
 
 @Service("scenicspotService")
 public class ScenicspotService implements IScenicspotService {
@@ -131,4 +132,21 @@ public class ScenicspotService implements IScenicspotService {
 		if(scenicspot!=null)return scenicspot;
 		else return null;
 	}
+
+	@Override
+	public List<Scenicspot> listDormitories() {
+		return scenicspotDao.list("from Scenicspot s where s.spotname like \'%G%\'");
+	}
+
+	@Override
+	public Scenicspot loadDormByName(String name) {
+		return scenicspotDao.loadByHql("from Scenicspot s where s.spotname = ?",name);
+	}
+
+	@Override
+	public Scenicspot load(int id) {
+		return scenicspotDao.load(id);
+	}
+	
+	
 }

@@ -2,7 +2,7 @@ package com.techthinker.CAWeb.iservice;
 
 import java.sql.Blob;
 
-import com.techthinker.CAWeb.vo.Spotcomment;
+import com.techthinker.CAWeb.persistence.Spotcomment;
 
 public interface ISpotcommentService {
 	

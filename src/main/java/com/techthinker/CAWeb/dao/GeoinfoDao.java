@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.techthinker.CAWeb.idao.IGeoinfoDao;
-import com.techthinker.CAWeb.vo.Geoinfo;
+import com.techthinker.CAWeb.persistence.Geoinfo;
 
 
 @Repository("geoinfoDao")

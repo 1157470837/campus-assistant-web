@@ -2,8 +2,8 @@ package com.techthinker.CAWeb.iservice;
 
 import java.util.List;
 
+import com.techthinker.CAWeb.persistence.Relation;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.Relation;
 
 public interface IRelationService {
 	/**

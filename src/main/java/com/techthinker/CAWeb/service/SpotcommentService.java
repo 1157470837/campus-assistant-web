@@ -15,9 +15,9 @@ import com.techthinker.CAWeb.idao.ISpotcommentDao;
 import com.techthinker.CAWeb.iservice.IScenicspotService;
 import com.techthinker.CAWeb.iservice.ISpotcommentService;
 import com.techthinker.CAWeb.iservice.IUserService;
-import com.techthinker.CAWeb.vo.Scenicspot;
-import com.techthinker.CAWeb.vo.Spotcomment;
-import com.techthinker.CAWeb.vo.User;
+import com.techthinker.CAWeb.persistence.Scenicspot;
+import com.techthinker.CAWeb.persistence.Spotcomment;
+import com.techthinker.CAWeb.persistence.User;
 
 @Service("spotcommentService")
 public class SpotcommentService implements ISpotcommentService {

@@ -1,17 +1,17 @@
 package com.techthinker.CAWeb.util;
 
-import com.techthinker.CAWeb.vo.IndexField;
+import com.techthinker.CAWeb.persistence.IndexField;
 
 
 public class IndexUtil {
 	public static final String ACTION_USER = "User";
 	public static final String ACTION_COLLEGE = "College";
 	public static final String ACTION_MAJOR = "Major";
-	public static final String ACTION_GRADE = "grade";
-	public static final String ACTION_CAMPUSNEWS = "campusnews";
-	public static final String ACTION_QUESTION = "question";
-	public static final String ACTION_SCENICSPOT = "scenicspot";
-	public static final String ACTION_INTENT = "intent";
+	public static final String ACTION_GRADE = "Grade";
+	public static final String ACTION_CAMPUSNEWS = "Campusnews";
+	public static final String ACTION_QUESTION = "Question";
+	public static final String ACTION_SCENICSPOT = "Scenicspot";
+	public static final String ACTION_INTENT = "Intent";
 	
 	public final static int OP_ADD= 1;
 	public final static int OP_DEL= 2;

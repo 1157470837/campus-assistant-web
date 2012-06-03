@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.stereotype.Service;
 
-import com.techthinker.CAWeb.analyzer.EtartAnalyzer;
+import com.techthinker.CAWeb.etart.EtartDictionary;
 import com.techthinker.CAWeb.idao.ICampusnewsDao;
 import com.techthinker.CAWeb.idao.ICollegeDao;
 import com.techthinker.CAWeb.idao.IGradeDao;
@@ -20,18 +20,18 @@ import com.techthinker.CAWeb.idao.IScenicspotDao;
 import com.techthinker.CAWeb.idao.ITempIndexDao;
 import com.techthinker.CAWeb.idao.IUserDao;
 import com.techthinker.CAWeb.iservice.IIndexService;
+import com.techthinker.CAWeb.persistence.Campusnews;
+import com.techthinker.CAWeb.persistence.College;
+import com.techthinker.CAWeb.persistence.Grade;
+import com.techthinker.CAWeb.persistence.IndexField;
+import com.techthinker.CAWeb.persistence.Intent;
+import com.techthinker.CAWeb.persistence.Major;
+import com.techthinker.CAWeb.persistence.Question;
+import com.techthinker.CAWeb.persistence.Scenicspot;
+import com.techthinker.CAWeb.persistence.TempIndex;
+import com.techthinker.CAWeb.persistence.User;
 import com.techthinker.CAWeb.solr.SolrContext;
 import com.techthinker.CAWeb.util.IndexUtil;
-import com.techthinker.CAWeb.vo.Campusnews;
-import com.techthinker.CAWeb.vo.College;
-import com.techthinker.CAWeb.vo.Grade;
-import com.techthinker.CAWeb.vo.IndexField;
-import com.techthinker.CAWeb.vo.Intent;
-import com.techthinker.CAWeb.vo.Major;
-import com.techthinker.CAWeb.vo.Question;
-import com.techthinker.CAWeb.vo.Scenicspot;
-import com.techthinker.CAWeb.vo.TempIndex;
-import com.techthinker.CAWeb.vo.User;
 
 @Service("indexService")
 public class IndexService implements IIndexService {
@@ -44,13 +44,13 @@ public class IndexService implements IIndexService {
 	private IQuestionDao questionDao;
 	private IScenicspotDao scenicspotDao;
 	private IIntentDao intentDao;
-	private EtartAnalyzer etart;
+	private EtartDictionary etartDic;
 
 	/**
 	 * @return the etart
 	 */
-	public EtartAnalyzer getEtart() {
-		return etart;
+	public EtartDictionary getEtartDic() {
+		return etartDic;
 	}
 
 	/**
@@ -58,8 +58,8 @@ public class IndexService implements IIndexService {
 	 *            the etart to set
 	 */
 	@Resource
-	public void setEtart(EtartAnalyzer etart) {
-		this.etart = etart;
+	public void setEtartDic(EtartDictionary etartDic) {
+		this.etartDic = etartDic;
 	}
 
 	/**
@@ -269,11 +269,15 @@ public class IndexService implements IIndexService {
 			List<IndexField> majorIndexFields = new ArrayList<IndexField>();
 			List<IndexField> questionIndexFields = new ArrayList<IndexField>();
 			List<IndexField> senicspotIndexFields = new ArrayList<IndexField>();
-			List<User> users = new ArrayList<User>();
+			List<String> usersNames = new ArrayList<String>();
+			List<String> collegesNames = new ArrayList<String>();
+			List<String> majorsNames = new ArrayList<String>();
+			List<String> scenicspotsNames = new ArrayList<String>();
+			List<String> intents = new ArrayList<String>();
 			for (TempIndex ti : tis) {
 				if (ti.getObjType().equals(IndexUtil.ACTION_USER)) {
 					User user = userDao.load(ti.getObjId());
-					users.add(user);
+					usersNames.add(user.getUsername());
 					userIndexFields.add(indexUser(user, ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_CAMPUSNEWS)) {
 					Campusnews campusnews = campusnewsDao.load(ti.getObjId());
@@ -281,6 +285,7 @@ public class IndexService implements IIndexService {
 							ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_COLLEGE)) {
 					College college = collegeDao.load(ti.getObjId());
+					collegesNames.add(college.getCollegeName());
 					collegeIndexFields.add(indexCollege(college,
 							ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_GRADE)) {
@@ -288,10 +293,16 @@ public class IndexService implements IIndexService {
 					gradeIndexFields.add(indexGrade(grade, ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_INTENT)) {
 					Intent intent = intentDao.load(ti.getObjId());
+					intents.add(intent.getBrief());
+					String[] extensions=intent.getExtension().split(";");
+					for(String s:extensions){
+						intents.add(s);
+					}
 					intentIndexFields
 							.add(indexIntent(intent, ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_MAJOR)) {
 					Major major = majorDao.load(ti.getObjId());
+					majorsNames.add(major.getMajorName());
 					majorIndexFields.add(indexMajor(major, ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_QUESTION)) {
 					Question question = questionDao.load(ti.getObjId());
@@ -299,11 +310,16 @@ public class IndexService implements IIndexService {
 							ti.getOperator()));
 				} else if (ti.getObjType().equals(IndexUtil.ACTION_SCENICSPOT)) {
 					Scenicspot scenicspot = scenicspotDao.load(ti.getObjId());
+					scenicspotsNames.add(scenicspot.getSpotname());
 					senicspotIndexFields.add(indexScenicspot(scenicspot,
 							ti.getOperator()));
 				}
 			}
-			etart.updateUserDic(users);
+			etartDic.updateUserDic(usersNames);
+			etartDic.updateCollegeDic(collegesNames);
+			etartDic.updateMajorDic(majorsNames);
+			etartDic.updateScenicspotDic(scenicspotsNames);
+			etartDic.updateIntentDic(intents);
 			indexFields.addAll(userIndexFields);
 			indexFields.addAll(collegeIndexFields);
 			indexFields.addAll(majorIndexFields);
@@ -311,7 +327,7 @@ public class IndexService implements IIndexService {
 			indexFields.addAll(questionIndexFields);
 			indexFields.addAll(senicspotIndexFields);
 			indexFields.addAll(campusnewsIndexFields);
-			indexFields.addAll(indexFields);
+			indexFields.addAll(intentIndexFields);
 			addIndex(indexFields);
 			SolrContext.getServer().commit();
 			tempIndexDao.delAll();
@@ -595,62 +611,4 @@ public class IndexService implements IIndexService {
 		}
 		return indexField;
 	}
-
-	// @Override
-	// public PageObject<Index> findByIndex(String condition) {
-	// if(condition==null) condition = "";
-	// PageObject<Index> pages = new PageObject<Index>();
-	// List<Index> datas = new ArrayList<Index>();
-	// try {
-	// int pageSize = SystemContext.getPageSize();
-	// int pageOffset = SystemContext.getPageOffset();
-	// SolrQuery query = new SolrQuery(condition);
-	// query.setHighlight(true)
-	// .setHighlightSimplePre("<span class='lighter'>")
-	// .setHighlightSimplePost("</span>")
-	// .setParam("hl.fl", "msg_title,msg_content")
-	// .setStart(pageOffset).setRows(pageSize);
-	// QueryResponse resp = SolrContext.getServer().query(query);
-	// SolrDocumentList sdl = resp.getResults();
-	// for(SolrDocument sd:sdl) {
-	// String id = (String)sd.getFieldValue("id");
-	// int msgId = (Integer)sd.getFieldValue("msg_id");
-	// String title = (String)sd.getFieldValue("msg_title");
-	// Date date = (Date)sd.getFieldValue("msg_date");
-	// List<String> contents = (List)sd.getFieldValues("msg_content");
-	// StringBuffer sb = new StringBuffer();
-	// for(String con:contents) {
-	// sb.append(con);
-	// }
-	// System.out.println(sb.toString());
-	// String sc = sb.toString();
-	// Index index = new Index();
-	// index.setCreateDate(date);
-	// index.setTitle(title);
-	//
-	// if(sc.length()>=150) {
-	// sc = sc.substring(0,150);
-	// }
-	// index.setSummary(sc);
-	// index.setMsgId(msgId);
-	// if(resp.getHighlighting().get(id)!=null) {
-	// List<String> htitle = resp.getHighlighting().get(id).get("msg_title");
-	// if(htitle!=null) index.setTitle(htitle.get(0));
-	// List<String> hcontent =
-	// resp.getHighlighting().get(id).get("msg_content");
-	// if(hcontent!=null)index.setSummary(hcontent.get(0));
-	// }
-	// datas.add(index);
-	// }
-	//
-	// pages.setDatas(datas);
-	// pages.setOffset(pageOffset);
-	// pages.setPageSize(pageSize);
-	// pages.setTotalRecord(new Long(sdl.getNumFound()).intValue());
-	// } catch (SolrServerException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return pages;
-	// }
 }

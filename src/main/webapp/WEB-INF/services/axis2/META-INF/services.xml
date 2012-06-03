@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceGroup>
+	<service name="sayHelloService">
+		<description>
+			sayHelloService:Spring POJO Axis2 Service Sample
+		</description>
+		<parameter name="ServiceClass">
+			com.techthinker.CAWeb.iwebservice.IHelloWorld
+		</parameter>
+		<parameter name="ServiceObjectSupplier">
+			org.apache.axis2.extensions.spring.receivers.SpringServletContextObjectSupplier
+		</parameter>
+		<parameter name="SpringBeanName">sayHelloService</parameter>
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+				class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+		</messageReceivers>
+		</service>
+		<service name="etartService">
+		<description>
+			etart intelligent chat webservice
+		</description>
+		<parameter name="ServiceClass">
+			com.techthinker.CAWeb.iwebservice.IEtartWebservice
+		</parameter>
+		<parameter name="ServiceObjectSupplier">
+			org.apache.axis2.extensions.spring.receivers.SpringServletContextObjectSupplier
+		</parameter>
+		<parameter name="SpringBeanName">etartWebservice</parameter>
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+				class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+		</messageReceivers>
+	</service>
+</serviceGroup> 

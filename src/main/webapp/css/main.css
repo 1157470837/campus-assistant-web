@@ -1,0 +1,14 @@
+#bottom{padding:5px 4px; border-top:solid 1px #bbb; line-height:150%; margin-top:6px;}
+#footer{height:25px;padding-left:7px;background:#cb213c;}
+.rb{color:#fff; background:#D32C47; padding:3px 5px; border-left:1px solid #fff; border-top:1px solid #fff; border-right:1px solid #6a6a6a; border-bottom:1px solid #6a6a6a; cursor:pointer;}
+.list{padding:5px 4px 5px 4px;border-bottom:solid 1px #ddd;word-wrap:break-word;}
+.tips{border:solid 1px #f02222; background:#fedfdf; line-height:150%; margin:5px 2px; padding:0 3px; }
+
+div label{display:block;margin-bottom:2px;color:#666;}
+ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
+
+a { color: #00e; }
+a:visited { color: #551a8b; }
+a:hover { color: #06e; }
+a:focus { outline: thin dotted; }
+a:hover, a:active { outline: 0; }

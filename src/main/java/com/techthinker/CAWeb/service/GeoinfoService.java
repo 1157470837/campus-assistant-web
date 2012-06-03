@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.techthinker.CAWeb.dao.GeoinfoDao;
 import com.techthinker.CAWeb.iservice.IGeoinfoService;
-import com.techthinker.CAWeb.vo.Geoinfo;
+import com.techthinker.CAWeb.persistence.Geoinfo;
 
 @Service("geoinfoService")
 public class GeoinfoService implements IGeoinfoService {

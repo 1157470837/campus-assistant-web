@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-
+import com.techthinker.CAWeb.persistence.Chatroom;
+import com.techthinker.CAWeb.persistence.Message;
+import com.techthinker.CAWeb.persistence.User;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.Chatroom;
 
 public interface IChatroomService {
 	/**
@@ -62,6 +63,38 @@ public interface IChatroomService {
 	 * @param inputStream
 	 * @throws IOException
 	 */
+	/**
+	 * 用户进入聊天室
+	 * @param user
+	 * @param roomID
+	 */
+	public void enterRoom(User user, int roomID);
+	/**
+	 * 用户推出聊天室
+	 * @param userID
+	 * @param roomID
+	 */
+	public void exitRoom(int userID,  int roomID);
+	/**
+	 * 发送消息
+	 * @param type	1：向聊天室发送消息	2：向用户发送消息
+	 * @param name	有type决定，若type=1，则identity是聊天室的ID号；若type=2，则identity是用户的ID号
+	 * @param user	发送消息的用户
+	 * @param message	消息内容
+	 */
+	public void sendMessageToRoom(int type,int identity,User user, String message);
+	/**
+	 * 取出指定Id的聊天室中登入的用户
+	 * @param roomId	聊天室ID
+	 * @return List<User>
+	 */
+	public List<User> getUsersAvailableInRoom(int roomId);
+	/**
+	 * 取出指定Id的聊天室中的消息
+	 * @param roomId  聊天室ID
+	 * @return List<Message>
+	 */
+	List<Message> getMessagesInRoom(int roomId);
 	public void addChatroomFromInputStream(InputStream inputStream)
 			throws IOException;
 }

@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import com.techthinker.CAWeb.persistence.Major;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.Major;
 
 public interface IMajorService {
 	/**
@@ -49,6 +49,12 @@ public interface IMajorService {
 	 * @return
 	 */
 	public Major loadByMajorname(String majorName);
+	/**
+	 * 根据学院Id列出所有属于这个学院的专业
+	 * @param id 学院id号
+	 * @return List<Major>
+	 */
+	public List<Major> listMajorsByCollegeId(int id);
 	/**
 	 * 检查专业是否存在
 	 * @param majorName

@@ -27,19 +27,21 @@
 
 		<!-- 设置根据用户对象自动创建数据库表 -->
 		<property name="hbm2ddl.auto">update</property>
-		<mapping class="com.techthinker.CAWeb.vo.Grade" />
-		<mapping class="com.techthinker.CAWeb.vo.Major" />
-		<mapping class="com.techthinker.CAWeb.vo.College" />
-		<mapping class="com.techthinker.CAWeb.vo.Question" />
-		<mapping class="com.techthinker.CAWeb.vo.Geoinfo" />
-		<mapping class="com.techthinker.CAWeb.vo.User" />
-		<mapping class="com.techthinker.CAWeb.vo.Usertype" />
-		<mapping class="com.techthinker.CAWeb.vo.Relation" />
-		<mapping class="com.techthinker.CAWeb.vo.Campusnews" />
-		<mapping class="com.techthinker.CAWeb.vo.Chatroom" />
-		<mapping class="com.techthinker.CAWeb.vo.Message" />
-		<mapping class="com.techthinker.CAWeb.vo.Spotcomment" />
-		<mapping class="com.techthinker.CAWeb.vo.Scenicspot" />
+		<mapping class="com.techthinker.CAWeb.persistence.Grade" />
+		<mapping class="com.techthinker.CAWeb.persistence.Major" />
+		<mapping class="com.techthinker.CAWeb.persistence.College" />
+		<mapping class="com.techthinker.CAWeb.persistence.Question" />
+		<mapping class="com.techthinker.CAWeb.persistence.Geoinfo" />
+		<mapping class="com.techthinker.CAWeb.persistence.User" />
+		<mapping class="com.techthinker.CAWeb.persistence.Usertype" />
+		<mapping class="com.techthinker.CAWeb.persistence.Relation" />
+		<mapping class="com.techthinker.CAWeb.persistence.Campusnews" />
+		<mapping class="com.techthinker.CAWeb.persistence.Chatroom" />
+		<mapping class="com.techthinker.CAWeb.persistence.Message" />
+		<mapping class="com.techthinker.CAWeb.persistence.Spotcomment" />
+		<mapping class="com.techthinker.CAWeb.persistence.Scenicspot" />
+		<mapping class="com.techthinker.CAWeb.persistence.TempIndex" />
+		<mapping class="com.techthinker.CAWeb.persistence.Intent" />
 
 	</session-factory>
 </hibernate-configuration>

@@ -13,8 +13,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.techthinker.CAWeb.persistence.User;
 import com.techthinker.CAWeb.util.AuthUtil;
-import com.techthinker.CAWeb.vo.User;
 
 /**
  * 权限过滤器，当获得请求连接时，检查用户是否有访问权限

@@ -5,8 +5,10 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
+import com.techthinker.CAWeb.persistence.Campusnews;
+import com.techthinker.CAWeb.persistence.College;
+import com.techthinker.CAWeb.persistence.Major;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.Campusnews;
 
 public interface ICampusnewsService {
 	/**
@@ -33,23 +35,83 @@ public interface ICampusnewsService {
 	 */
 	public Campusnews load(int id);
 	/**
-	 * 获取所有校园消息列表
+	 * 获取所有校园消息列表(包括新闻和通知)
 	 * @return 所有校园消息列表
 	 */
 	public List<Campusnews> list();
-
 	/**
-	 * 根据分页获取校园消息信息
-	 * @param pageOffset 从哪一个位置开始查询
-	 * @param pageSize 每页显示多少条
+	 * 获取所有校园新闻列表
 	 * @return
 	 */
-	public PageObject<Campusnews> find(int newstype,
-										Date pubdate,
-										int userId,
-										int collegeId,
-										int majorId,
-										int level);
+	public List<Campusnews> listNews();
+	/**
+	 * 获取所有学院通过信息
+	 * @return
+	 */
+	public List<Campusnews> listCollegeNotif();
+	/**
+	 * 获取所有专业通过信息
+	 * @return
+	 */
+	public List<Campusnews> listMajorNotif();
+	/**
+	 * 获取所有通过信息(包括学校、学院和专业)
+	 * @return
+	 */
+	public List<Campusnews> listNotif();
+	/**
+	 * 获取所有学校通过信息
+	 * @return
+	 */
+	public List<Campusnews> listCampusNotif();
+
+	/**
+	 * 获取校园消息信息,并用分页显示
+	 * @param pageOffset 从哪一个位置开始查询
+	 * @param pageSize 每页显示多少条
+	 * @param type	类型:1.新闻,2.通知,0.新闻和通知
+	 * @return
+	 */
+	public PageObject<Campusnews> find(int type);
+	/**
+	 * 根据日期获取校园消息信息,并用分页显示
+	 * @param start 开始日期
+	 * @param End	结束日期
+	 * @param type	类型:1.新闻,2.通知,0.新闻和通知
+	 * @return
+	 */
+	public PageObject<Campusnews> findByDate(Date start,Date End,int type);
+	/**
+	 * 根据学院获取校园消息信息,并用分页显示
+	 * @param college
+	 * @param type	类型:1.新闻,2.通知,0.新闻和通知
+	 * @return
+	 */
+	public PageObject<Campusnews> findByCollege(College college, int type);
+	/**
+	 * 根据专业获取校园消息信息,并用分页显示
+	 * @param major
+	 * @param type	类型:1.新闻,2.通知,0.新闻和通知
+	 * @return
+	 */
+	public PageObject<Campusnews> findByMajor(Major major, int type);
+	/**
+	 * 获取新闻,并用分页显示
+	 * @return
+	 */
+	public PageObject<Campusnews> findNews();
+	/**
+	 * 获取通知,并用分页显示
+	 * @return
+	 */
+	public PageObject<Campusnews> findNotification();
+	/**
+	 * 根据用户ID获取校园信息,并用分页显示
+	 * @param id
+	 * @param type	类型:1.新闻,2.通知,0.新闻和通知
+	 * @return
+	 */
+	public PageObject<Campusnews> findByUserID(int id, int type);
 	/**
 	 * 从输入流里读取校园消息信息，批量读取
 	 * @param inputStream

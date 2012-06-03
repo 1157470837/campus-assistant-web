@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.techthinker.CAWeb.idao.IRelationDao;
 import com.techthinker.CAWeb.iservice.IRelationService;
+import com.techthinker.CAWeb.persistence.Relation;
 import com.techthinker.CAWeb.util.PageObject;
-import com.techthinker.CAWeb.vo.Relation;
 
 @Service("relationService")
 public class RelationService implements IRelationService {

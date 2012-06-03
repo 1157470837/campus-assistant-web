@@ -1,6 +1,6 @@
 package com.techthinker.CAWeb.idao;
 
-import com.techthinker.CAWeb.vo.Intent;
+import com.techthinker.CAWeb.persistence.Intent;
 
 public interface IIntentDao extends IBaseDao<Intent> {
 

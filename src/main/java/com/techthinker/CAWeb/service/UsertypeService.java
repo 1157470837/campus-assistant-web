@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.techthinker.CAWeb.idao.IUsertypeDao;
 import com.techthinker.CAWeb.iservice.IUsertypeService;
-import com.techthinker.CAWeb.vo.Usertype;
+import com.techthinker.CAWeb.persistence.Usertype;
 
 @Service("usertypeService")
 public class UsertypeService implements IUsertypeService {
@@ -31,6 +31,13 @@ public class UsertypeService implements IUsertypeService {
 	@Resource
 	public void setUsertypeDao(IUsertypeDao usertypeDao) {
 		this.usertypeDao = usertypeDao;
+	}
+
+	
+	
+	@Override
+	public Usertype loadByUsertypeId(int id) {
+		return usertypeDao.load(id);
 	}
 
 	@Override
@@ -54,4 +61,6 @@ public class UsertypeService implements IUsertypeService {
 			r = br.readLine();
 		}
 	}
+	
+	
 }
